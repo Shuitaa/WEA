@@ -274,4 +274,5 @@ input {
     background: #535353;
     width: 200px;
     height: 64px;
+    cursor: pointer;
 }
