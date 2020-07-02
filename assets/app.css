@@ -3,6 +3,11 @@
 *::after {
     box-sizing: border-box;
 }
+Button:focus,
+.form-input:focus {
+    outline: none
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -31,6 +36,7 @@ a {
 p {
     font-size: 1rem;
     text-align: justify;
+    margin: 15px 0 15px 0;
 }
 .home-presentation-text p:first-child {
     margin-top: 0;
@@ -48,6 +54,9 @@ p {
 .title, .subtitle {
     font-weight: 500;
     margin: 0;
+}
+.title-page {
+    margin: 45px auto 0 120px ;
 }
 .link-text {
     color: #000000;
@@ -123,7 +132,7 @@ footer {
 .footer-content {
     width: 750px;
     margin: 0 auto 0 auto;
-    font-size: 1rem;
+    font-size: 0.61rem;
 }
 .footer-content-left {
     float: left;
@@ -133,7 +142,7 @@ footer {
 }
 .footer-content-left-bottom {
     display: block;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 .img-container {
     display: flex;
@@ -173,3 +182,96 @@ footer {
     margin-top: 70px;
 }
 
+
+
+.twitter-container {
+    margin-top: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;  
+}
+.twitter-content {
+    margin: 0 auto 0 auto;
+    width: 600px;
+    height: 300px;
+}
+.media-button {
+    margin: 10px auto 0 auto;
+    display: flex;
+    width: 170px;
+    justify-content: space-between;
+}
+.news-container {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;  
+}
+.news-content {
+    margin: 45px auto 0 auto;
+    width: 880px;
+}
+.news-container:first-child {
+    margin-top: 0;
+}
+.news-img {
+    float: left;
+    margin: 0 25px 18px 0;
+}
+.news-date {
+    display: block;
+    margin-top: 10px;
+}
+
+
+.form-container {
+    margin-top:45px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.form-content{
+    margin: 0 auto 0 125px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+}
+.form-input{
+    background: rgba(83, 83, 83, 0.25);
+    border : 0;
+    margin : 0;
+    padding: 0;
+    padding-left: 5px;
+    border-bottom: 1px solid #535353;
+}
+.input,.textarea,.label {
+    margin-top: 15px;
+    color: #535353;
+    font-family: 'Montserrat', sans-serif;
+}
+
+input {
+    height: 32px;
+    width: 350px;
+}
+.textarea {
+    padding-top: 5px;
+    height: 224px;
+    resize: none;
+}
+.label:first-child {
+    margin-top: 0;
+}
+.form-button {
+    margin-top: 100px;
+    margin-left: 472px;
+    font-family: 'Montserrat', sans-serif;
+    color : #ffffff;
+    border: 0;
+    background: #535353;
+    width: 200px;
+    height: 64px;
+}
