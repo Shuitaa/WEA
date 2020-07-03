@@ -1,1 +1,1 @@
-assets/secret.php
+secret.php
