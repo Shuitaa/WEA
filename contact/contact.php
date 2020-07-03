@@ -10,6 +10,8 @@
     <? require "assets/secret.php" ?>
 </head>
 <body>
+
+    
     
     <main>
         <div class="container">
@@ -55,7 +57,7 @@
                 </div>
                 <div class="nav-lettre nav-lettre-content-2">
                     <a href="" class="lettre link">X</a>
-                    <a href="" class="lettre link">Y</a> class="link"
+                    <a href="" class="lettre link">Y</a>
                     <a href="" class="lettre link">Z</a>
                 </div>
             </nav>

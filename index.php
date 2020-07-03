@@ -75,7 +75,6 @@
                     <?php 
                         while ($data_img = $stmt_img -> fetch()) {
                             echo ('<img class="img" alt="'.$data_img['alt'].'" src="'.$data_img['url_image'].'">');
-
                         }
                     
                     ?>

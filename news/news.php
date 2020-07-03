@@ -6,9 +6,15 @@
     <title>L'encyclopédie des femmes - News</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
-    <? require "assets/secret.php" ?>
+    <?php $db = new PDO ("mysql:host=localhost;dbname=wea_demo_db", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));?>
 </head>
 <body>
+
+    <?php 
+        $stmt_param = $db -> prepare("SELECT titre_site, url_logo, url_compte_twitter FROM wea_parametre");
+        $stmt_param -> execute();
+        $data_param = $stmt_param -> fetch();
+    ?>
     
     <main>
         <div class="container">
@@ -22,8 +28,16 @@
             </nav>
             <header>
                 <div class="header-content">
-                    <img src="../img/logo.jpg" alt="logo" class="logo">
-                    <h1 class="titre-home-presentation title">L'encyclopédie des femmes</h1>
+                <?php
+                if( $data_param['url_logo'] !== NULL AND $data_param['titre_site'] !== NULL) {
+                     echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                     echo('<h1 class="titre-home-presentation-left title">'.$data_param['titre_site'].'</h1>');
+                } else if( $data_param['url_logo'] === NULL ) {
+                      echo('<h1 class="titre-home-presentation-center title">'.$data_param['titre_site'].'</h1>');
+                } else if ($data_param['titre_site'] === NULL) {
+                    echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                };
+                     ?>
                 </div>
             </header>
             <nav class="nav-lettre-container">
@@ -59,15 +73,19 @@
                 </div>
             </nav>
             <h2 class="title title-page">News</h2>
-            <article class="twitter-container">
-                    <div class="twitter-content">
-                        <a class="twitter-timeline" href="https://twitter.com/encycloDfemmes?ref_src=twsrc%5Etfw" data-height="302"data-chrome="noheader nofooter noborders transparent">Tweets by encycloDfemmes</a>
-                    </div>
-                    <div class="media-button">
-                        <a href="">Contact</a>
-                        <div class="fb-share-button" data-href="https://www.encyclopediedesfemmes.com/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.encyclopediedesfemmes.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
-                    </div>
-            </article>
+            <?php
+                if ( $data_param['url_compte_twitter'] !== NULL ){
+                echo('<article class="twitter-container">
+                        <div class="twitter-content">
+                            <a class="twitter-timeline" href="https://twitter.com/encycloDfemmes?ref_src=twsrc%5Etfw" data-height="302"data-chrome="noheader nofooter noborders transparent"></a>
+                        </div>
+                        <div class="media-button">
+                            <a href="">Contact</a>
+                            <div class="fb-share-button" data-href="https://www.encyclopediedesfemmes.com/" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.encyclopediedesfemmes.com%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partager</a></div>
+                        </div>
+                </article>');
+                            }
+            ?>
             <div class="news-container">
                     <div class="news-content">
                         <img src="../img/news1-photo.png" alt="" class="news-img">

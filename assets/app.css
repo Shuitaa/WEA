@@ -96,13 +96,18 @@ p {
 .logo {
     width: 158px;
     height: 158px;
+    margin-right: 25px;
 }
 
-.titre-home-presentation {
+.titre-home-presentation-left {
     margin-top: -5px;
-    margin-left: 25px;
     width: 526px;                                                                                                     ;
     text-align: left;
+}
+.titre-home-presentation-center {
+    margin-top: -5px;
+    width: 526px;                                                                                                     ;
+    text-align: center;
 }
 .nav-lettre-container {
     display: flex;
