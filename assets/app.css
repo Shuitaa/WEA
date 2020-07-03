@@ -30,7 +30,11 @@ header {
     width: 100%;
 }
 a {
+    color: #000000;
     text-decoration: none;
+    font-weight: 500;   
+}
+a:hover {
     color: #535353;
 }
 p {
@@ -43,6 +47,11 @@ p {
 }
 .page-actuelle {
     color : #000000;
+    text-decoration: none;
+}
+.link {
+    font-weight: 400;
+    color: #535353;
 }
 .title {
     font-size: 4.236rem;
@@ -56,13 +65,6 @@ p {
 }
 .title-page {
     margin: 45px auto 0 120px ;
-}
-.link-text {
-    color: #000000;
-    font-weight: 500;   
-}
-.link-text:hover {
-    color: #535353;
 }
 .container {
     background-color: #ffffff;
@@ -89,6 +91,7 @@ p {
     margin: 45px auto 0 auto;
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 .logo {
     width: 158px;
@@ -162,7 +165,6 @@ footer {
     margin-top: 5px;
     width: 110px;
     height: 110px;
-    background-color: #000000;
 }
 .home-presentation-container {
     margin-top: 100px;

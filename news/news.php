@@ -14,10 +14,10 @@
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
-                    <a href="../index.php">Home</a>
+                    <a href="../index.php" class="link">Home</a>
                     <a href="" class="page-actuelle">News</a>
-                    <a href="../contact/contact.php">Contact</a>
-                    <a href="../mentions-legales/mentions-legales.php">Mentions légales</a>
+                    <a href="../contact/contact.php" class="link">Contact</a>
+                    <a href="../mentions-legales/mentions-legales.php" class="link">Mentions légales</a>
                 </div>
             </nav>
             <header>
@@ -28,34 +28,34 @@
             </header>
             <nav class="nav-lettre-container">
                 <div class="nav-lettre nav-lettre-content-1">
-                    <a href="" class="lettre">A</a>
-                    <a href="" class="lettre">B</a>
-                    <a href="" class="lettre">C</a>
-                    <a href="" class="lettre">D</a>
-                    <a href="" class="lettre">E</a>
-                    <a href="" class="lettre">F</a>
-                    <a href="" class="lettre">G</a>
-                    <a href="" class="lettre">H</a>
-                    <a href="" class="lettre">I</a>
-                    <a href="" class="lettre">J</a>
-                    <a href="" class="lettre">K</a>
-                    <a href="" class="lettre">L</a>
-                    <a href="" class="lettre">M</a>
-                    <a href="" class="lettre">N</a>
-                    <a href="" class="lettre">O</a>
-                    <a href="" class="lettre">P</a>
-                    <a href="" class="lettre">Q</a>
-                    <a href="" class="lettre">R</a>
-                    <a href="" class="lettre">S</a>
-                    <a href="" class="lettre">T</a>
-                    <a href="" class="lettre">U</a>
-                    <a href="" class="lettre">V</a>
-                    <a href="" class="lettre">W</a>
+                    <a href="" class="lettre link">A</a>
+                    <a href="" class="lettre link">B</a>
+                    <a href="" class="lettre link">C</a>
+                    <a href="" class="lettre link">D</a>
+                    <a href="" class="lettre link">E</a>
+                    <a href="" class="lettre link">F</a>
+                    <a href="" class="lettre link">G</a>
+                    <a href="" class="lettre link">H</a>
+                    <a href="" class="lettre link">I</a>
+                    <a href="" class="lettre link">J</a>
+                    <a href="" class="lettre link">K</a>
+                    <a href="" class="lettre link">L</a>
+                    <a href="" class="lettre link">M</a>
+                    <a href="" class="lettre link">N</a>
+                    <a href="" class="lettre link">O</a>
+                    <a href="" class="lettre link">P</a>
+                    <a href="" class="lettre link">Q</a>
+                    <a href="" class="lettre link">R</a>
+                    <a href="" class="lettre link">S</a>
+                    <a href="" class="lettre link">T</a>
+                    <a href="" class="lettre link">U</a>
+                    <a href="" class="lettre link">V</a>
+                    <a href="" class="lettre link">W</a>
                 </div>
                 <div class="nav-lettre nav-lettre-content-2">
-                    <a href="" class="lettre">X</a>
-                    <a href="" class="lettre">Y</a>
-                    <a href="" class="lettre">Z</a>
+                    <a href="" class="lettre link">X</a>
+                    <a href="" class="lettre link">Y</a>
+                    <a href="" class="lettre link">Z</a>
                 </div>
             </nav>
             <h2 class="title title-page">News</h2>
@@ -98,16 +98,16 @@
                     <div class="footer-content">
                         <div class="footer-content-left">
                             <div>
-                                <a href="javascript:window.print();">Version imprimable</a>
+                                <a href="javascript:window.print();" class="link">Version imprimable</a>
                                 <span>|</span>
-                                <a href="">Plan du site</a>
+                                <a href="" class="link">Plan du site</a>
                             </div>
                             <div>
                                 <span class="footer-content-left-bottom">© L´Encyclopédie des Femmes</span>
                             </div>
                         </div>
                         <div class="footer-content-right">
-                            <a href="">Connexion</a>
+                            <a href="" class="link">Connexion</a>
                         </div>
                     </div>
             </footer>

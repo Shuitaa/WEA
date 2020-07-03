@@ -6,95 +6,104 @@
     <title>L'encyclopédie des femmes - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/app.css">
-    <? require "assets/secret.php" ?>
+    <?php $db = new PDO ("mysql:host=localhost;dbname=wea_demo_db", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));?>
 </head>
 <body>
+
+    <?php
+        $stmt_param = $db -> prepare("SELECT titre_site, url_logo, titre_home_presentation, home_presentation FROM wea_parametre");
+        $stmt_param -> execute();
+        $data_param = $stmt_param -> fetch();
+
+        $stmt_img = $db -> prepare("SELECT * FROM wea_image WHERE accueil=1");
+        $stmt_img -> execute();
+
+    ?>
 
     <main>
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
                     <a href="" class="page-actuelle">Home</a>
-                    <a href="news/news.php">News</a>
-                    <a href="contact/contact.php">Contact</a>
-                    <a href="mentions-legales/mentions-legales.php">Mentions légales</a>
+                    <a href="news/news.php" class="link">News</a>
+                    <a href="contact/contact.php" class="link">Contact</a>
+                    <a href="mentions-legales/mentions-legales.php" class="link">Mentions légales</a>
                 </div>
             </nav>
             <header>
                 <div class="header-content">
-                    <img src="img/logo.jpg" alt="logo" class="logo">
-                    <h1 class="titre-home-presentation title">L'encyclopédie des femmes</h1>
+                <?php
+                    echo('<img src="'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                     echo('<h1 class="titre-home-presentation title">'.$data_param['titre_site'].'</h1>');
+                     ?>
                 </div>
             </header>
             <nav class="nav-lettre-container">
                 <div class="nav-lettre nav-lettre-content-1">
-                    <a href="" class="lettre">A</a>
-                    <a href="" class="lettre">B</a>
-                    <a href="" class="lettre">C</a>
-                    <a href="" class="lettre">D</a>
-                    <a href="" class="lettre">E</a>
-                    <a href="" class="lettre">F</a>
-                    <a href="" class="lettre">G</a>
-                    <a href="" class="lettre">H</a>
-                    <a href="" class="lettre">I</a>
-                    <a href="" class="lettre">J</a>
-                    <a href="" class="lettre">K</a>
-                    <a href="" class="lettre">L</a>
-                    <a href="" class="lettre">M</a>
-                    <a href="" class="lettre">N</a>
-                    <a href="" class="lettre">O</a>
-                    <a href="" class="lettre">P</a>
-                    <a href="" class="lettre">Q</a>
-                    <a href="" class="lettre">R</a>
-                    <a href="" class="lettre">S</a>
-                    <a href="" class="lettre">T</a>
-                    <a href="" class="lettre">U</a>
-                    <a href="" class="lettre">V</a>
-                    <a href="" class="lettre">W</a>
+                    <a href="" class="lettre link">A</a>
+                    <a href="" class="lettre link">B</a>
+                    <a href="" class="lettre link">C</a>
+                    <a href="" class="lettre link">D</a>
+                    <a href="" class="lettre link">E</a>
+                    <a href="" class="lettre link">F</a>
+                    <a href="" class="lettre link">G</a>
+                    <a href="" class="lettre link">H</a>
+                    <a href="" class="lettre link">I</a>
+                    <a href="" class="lettre link">J</a>
+                    <a href="" class="lettre link">K</a>
+                    <a href="" class="lettre link">L</a>
+                    <a href="" class="lettre link">M</a>
+                    <a href="" class="lettre link">N</a>
+                    <a href="" class="lettre link">O</a>
+                    <a href="" class="lettre link">P</a>
+                    <a href="" class="lettre link">Q</a>
+                    <a href="" class="lettre link">R</a>
+                    <a href="" class="lettre link">S</a>
+                    <a href="" class="lettre link">T</a>
+                    <a href="" class="lettre link">U</a>
+                    <a href="" class="lettre link">V</a>
+                    <a href="" class="lettre link">W</a>
                 </div>
                 <div class="nav-lettre nav-lettre-content-2">
-                    <a href="" class="lettre">X</a>
-                    <a href="" class="lettre">Y</a>
-                    <a href="" class="lettre">Z</a>
+                    <a href="" class="lettre link">X</a>
+                    <a href="" class="lettre link">Y</a>
+                    <a href="" class="lettre link">Z</a>
                 </div>
             </nav>
             <section class="img-container">
                 <div class="img-content">
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
+                    <?php 
+                        while ($data_img = $stmt_img -> fetch()) {
+                            echo ('<img class="img" alt="'.$data_img['alt'].'" src="'.$data_img['url_image'].'">');
+
+                        }
+                    
+                    ?>
                 </div>
             </section>
             <div class="home-presentation-container">
                 <div class="home-presentation-content">
-                    <h3 class="subtitle home-presentation-subtitle">Qu'est-ce que l'encyclopédie des femmes ?</h3>
-                    <span class="text home-presentation-text">
-                        <p>L’encyclopédie des femmes regroupe des extraits d’écrits de femmes rangés par mots clés, dans l’ordre alphabétique. Le projet de l’encyclopédie des femmes est de  créer une encyclopédie universelle dont les femmes sont sujets et non objets, en empruntant leurs voix et regards sur le monde.</p>
-                        <p>Les entrées de ce dictionnaire sont des mots, des noms communs. Afin de reconstituer les définitions des mots de l’encyclopédie des femmes, je ne lis depuis le 14 avril 2013 que des écrits de femmes, et je prélève des mots et des extraits au fil des livres.</p>
-                        <p>Les citations sont comme les tableaux d’une grande exposition, en cours d’accrochage, l’agencement peut encore changer, et la visite n’est pas systématiquement guidée ! L'encyclopédie des femmes est en perpétuelle construction, sa transcription n'en est encore qu'à ses débuts. Oui, je suis très lente.</p>
-                        <p>La bibliothèque de l'encyclopédie des femmes est <a href="" class="link-text">ici.</a></p>
-                        <p>On peut suivre l'actualité de l'encyclopédie des femmes, et en voir des extraits sur ce site ou sur <a href="" class="link-text">twitter.</a></p>
-                        <p>Pour une encyclopédie des femmes avec des notices bibliographiques et des articles thématiques, un travail monumental : voir <a href="" class="link-text">Le dictionnaire universel des créatrices, aux éditions Des femmes Antoinette Fouque</a>.</p>
-                        <p>De nombreuses initiatives pour faire connaitre les autrices, créatrices et autres grandes femmes se sont développées ces dernières années, et c'est réjouissant.</p>
-
-                    </span>
+                    <?php echo('<h3 class="subtitle home-presentation-subtitle">'.$data_param['titre_home_presentation'].'</h3>'); 
+                    echo('<span class="text home-presentation-text">
+                            '.$data_param['home_presentation'].'
+                          </span>');
+                    ?>
                 </div>
             </div>
             <footer>
                 <div class="footer-content">
                     <div class="footer-content-left">
                         <div>
-                            <a href="javascript:window.print();">Version imprimable</a>
+                            <a href="javascript:window.print();" class="link">Version imprimable</a>
                             <span>|</span>
-                            <a href="">Plan du site</a>
+                            <a href="" class="link">Plan du site</a>
                         </div>
                         <div>
-                            <span class="footer-content-left-bottom">© L´Encyclopédie des Femmes</span>
+                            <?php echo('<span class="footer-content-left-bottom">© '.$data_param['titre_site'].'</span>');?>
                         </div>
                     </div>
                     <div class="footer-content-right">
-                        <a href="">Connexion</a>
+                        <a href="" class="link">Connexion</a>
                     </div>
                 </div>
             </footer>
