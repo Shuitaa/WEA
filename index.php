@@ -6,7 +6,7 @@
     <title>L'encyclopédie des femmes - Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/app.css">
-    <?php $db = new PDO ("mysql:host=localhost;dbname=wea_demo_db", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));?>
+    <?php require ("assets/secret.php");?>
 </head>
 <body>
 
@@ -33,8 +33,14 @@
             <header>
                 <div class="header-content">
                 <?php
-                    echo('<img src="'.$data_param['url_logo'].'" alt="logo" class="logo">');
-                     echo('<h1 class="titre-home-presentation title">'.$data_param['titre_site'].'</h1>');
+                if( $data_param['url_logo'] !== NULL AND $data_param['titre_site'] !== NULL) {
+                     echo('<img src="'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                     echo('<h1 class="titre-home-presentation-left title">'.$data_param['titre_site'].'</h1>');
+                } else if( $data_param['url_logo'] === NULL ) {
+                      echo('<h1 class="titre-home-presentation-center title">'.$data_param['titre_site'].'</h1>');
+                } else if ($data_param['titre_site'] === NULL) {
+                    echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                };
                      ?>
                 </div>
             </header>

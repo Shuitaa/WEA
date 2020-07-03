@@ -7,10 +7,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
     <script src="https://www.google.com/recaptcha/api.js"></script>
-    <? require "assets/secret.php" ?>
+    <?php require ("../assets/secret.php");?>
 </head>
 <body>
 
+    <?php 
+        $stmt_param = $db -> prepare("SELECT titre_site, url_logo FROM wea_parametre");
+        $stmt_param -> execute();
+        $data_param = $stmt_param -> fetch();
+    ?>
     
     
     <main>
@@ -25,8 +30,16 @@
             </nav>
             <header>
                 <div class="header-content">
-                    <img src="../img/logo.jpg" alt="logo" class="logo">
-                    <h1 class="titre-home-presentation title">L'encyclopédie des femmes</h1>
+                <?php
+                if( $data_param['url_logo'] !== NULL AND $data_param['titre_site'] !== NULL) {
+                     echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                     echo('<h1 class="titre-home-presentation-left title">'.$data_param['titre_site'].'</h1>');
+                } else if( $data_param['url_logo'] === NULL ) {
+                      echo('<h1 class="titre-home-presentation-center title">'.$data_param['titre_site'].'</h1>');
+                } else if ($data_param['titre_site'] === NULL) {
+                    echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                };
+                     ?>
                 </div>
             </header>
             <nav class="nav-lettre-container">

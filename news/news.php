@@ -6,7 +6,7 @@
     <title>L'encyclopédie des femmes - News</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
-    <?php $db = new PDO ("mysql:host=localhost;dbname=wea_demo_db", "root", "" , array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));?>
+    <?php require ("../assets/secret.php");?>
 </head>
 <body>
 
@@ -14,6 +14,9 @@
         $stmt_param = $db -> prepare("SELECT titre_site, url_logo, url_compte_twitter FROM wea_parametre");
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
+
+        $stmt_news = $db -> prepare("SELECT * FROM wea_news");
+        $stmt_news -> execute();
     ?>
     
     <main>
@@ -87,7 +90,22 @@
                             }
             ?>
             <div class="news-container">
-                    <div class="news-content">
+
+                <?php 
+
+                while( $data_news = $stmt_news -> fetch() ) {
+                    echo ('<div class="news-content">
+                    <img src="" alt="" class="news-img">
+                    <h3 class="subtitle">'.$data_news['titre_news'].'</h3>
+                    <span class="news-date">'.$data_news['date_news'].'</span>
+                    <div class="news-text">
+                        '.$data_news['texte_news'].'
+                    </div>
+                </div>');
+                };
+                
+                ?>
+                    <!-- <div class="news-content">
                         <img src="../img/news1-photo.png" alt="" class="news-img">
                         <h3 class="subtitle">Titre news</h3>
                         <span class="news-date">Orléans, 19 mars 2020</span>
@@ -110,7 +128,7 @@
                         <div class="news-text">
                             <p>Après trois années de quasi silence, l'encyclopédie des femmes reprendra peut-être de la voix, depuis son nouveau quartier général à Orléans. Orléans est belle est pleine de promesses livresques et féministes : librairies, bouquinistes, livres anciens, des associations comme Arts et Littératures au pluriel, Mix Cité 45, le parlement des écrivaines francophones, Nous toutes. De nouveaux portraits et extraits sont en cours d'accrochage dans la galerie des citations de femmes !</p>
                         </div>
-                    </div>
+                    </div> -->
             </div>
             <footer>
                     <div class="footer-content">
