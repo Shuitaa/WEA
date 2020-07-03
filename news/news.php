@@ -6,6 +6,7 @@
     <title>L'encyclopédie des femmes - News</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
+    <? require "assets/secret.php" ?>
 </head>
 <body>
     
@@ -13,10 +14,10 @@
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
-                    <a href="../index.html">Home</a>
+                    <a href="../index.php">Home</a>
                     <a href="" class="page-actuelle">News</a>
-                    <a href="../contact/contact.html">Contact</a>
-                    <a href="">Mentions légales</a>
+                    <a href="../contact/contact.php">Contact</a>
+                    <a href="../mentions-legales/mentions-legales.php">Mentions légales</a>
                 </div>
             </nav>
             <header>

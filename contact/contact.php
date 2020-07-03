@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'encyclopédie des femmes - Home</title>
+    <title>L'encyclopédie des femmes - Contact</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="../assets/app.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <? require "assets/secret.php" ?>
 </head>
 <body>
-
+    
     <main>
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
-                    <a href="" class="page-actuelle">Home</a>
-                    <a href="news/news.html">News</a>
-                    <a href="contact/contact.html">Contact</a>
-                    <a href="">Mentions légales</a>
+                    <a href="../index.php">Home</a>
+                    <a href="../news/news.php">News</a>
+                    <a href=""  class="page-actuelle">Contact</a>
+                    <a href="../mentions-legales/mentions-legales.php">Mentions légales</a>
                 </div>
             </nav>
             <header>
                 <div class="header-content">
-                    <img src="img/logo.jpg" alt="logo" class="logo">
+                    <img src="../img/logo.jpg" alt="logo" class="logo">
                     <h1 class="titre-home-presentation title">L'encyclopédie des femmes</h1>
                 </div>
             </header>
@@ -57,28 +59,20 @@
                     <a href="" class="lettre">Z</a>
                 </div>
             </nav>
-            <section class="img-container">
-                <div class="img-content">
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                    <div class="img"></div>
-                </div>
-            </section>
-            <div class="home-presentation-container">
-                <div class="home-presentation-content">
-                    <h3 class="subtitle home-presentation-subtitle">Qu'est-ce que l'encyclopédie des femmes ?</h3>
-                    <span class="text home-presentation-text">
-                        <p>L’encyclopédie des femmes regroupe des extraits d’écrits de femmes rangés par mots clés, dans l’ordre alphabétique. Le projet de l’encyclopédie des femmes est de  créer une encyclopédie universelle dont les femmes sont sujets et non objets, en empruntant leurs voix et regards sur le monde.</p>
-                        <p>Les entrées de ce dictionnaire sont des mots, des noms communs. Afin de reconstituer les définitions des mots de l’encyclopédie des femmes, je ne lis depuis le 14 avril 2013 que des écrits de femmes, et je prélève des mots et des extraits au fil des livres.</p>
-                        <p>Les citations sont comme les tableaux d’une grande exposition, en cours d’accrochage, l’agencement peut encore changer, et la visite n’est pas systématiquement guidée ! L'encyclopédie des femmes est en perpétuelle construction, sa transcription n'en est encore qu'à ses débuts. Oui, je suis très lente.</p>
-                        <p>La bibliothèque de l'encyclopédie des femmes est <a href="" class="link-text">ici.</a></p>
-                        <p>On peut suivre l'actualité de l'encyclopédie des femmes, et en voir des extraits sur ce site ou sur <a href="" class="link-text">twitter.</a></p>
-                        <p>Pour une encyclopédie des femmes avec des notices bibliographiques et des articles thématiques, un travail monumental : voir <a href="" class="link-text">Le dictionnaire universel des créatrices, aux éditions Des femmes Antoinette Fouque</a>.</p>
-                        <p>De nombreuses initiatives pour faire connaitre les autrices, créatrices et autres grandes femmes se sont développées ces dernières années, et c'est réjouissant.</p>
-
-                    </span>
-                </div>
+            <h2 class="title title-page">Contact</h2>
+            <div class="form-container">
+                    <form action="" method="GET" class="form-content">
+                        <label for="nom" class="subtitle label">Nom *</label>
+                        <input type="text" name="nom" id="nom" required class="form-input input">
+                        <label for="mail" class="subtitle label">Adresse Email *</label>
+                        <input type="text" name="mail" id="mail" required class="form-input input">
+                        <label for="message" class="subtitle label">Message *</label>
+                        <textarea name="message" id="message" cols="50" rows="100" class="form-input textarea"></textarea>
+                        <!-- <button class="g-recaptcha" data-sitekey="6Ld_i6wZAAAAAGkBmrKQiwm4kSKIDqlybpZgHcqp" data-callback='onSubmit'
+                            data-action='submit'>Submit</button> -->
+                        <button class="form-button subtitle">ENVOYER</button>
+                    </form>
+                
             </div>
             <footer>
                 <div class="footer-content">
@@ -97,10 +91,14 @@
                     </div>
                 </div>
             </footer>
-
         </div>
     </main>
 
-    <script src="assets/app.js"></script>
+    <script src="../assets/app.js"></script>
+    <script>
+        function onSubmit(token) {
+          document.getElementById("demo-form").submit();
+        }
+      </script>
 </body>
 </html>

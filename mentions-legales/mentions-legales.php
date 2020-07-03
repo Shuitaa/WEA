@@ -1,23 +1,26 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'encyclopédie des femmes - Contact</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <title>L'encyclopédie des femmes - Mentions légales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <? require "assets/secret.php" ?>
 </head>
+
 <body>
-    
+
     <main>
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
-                    <a href="../index.html">Home</a>
-                    <a href="../news/news.html">News</a>
-                    <a href=""  class="page-actuelle">Contact</a>
-                    <a href="">Mentions légales</a>
+                    <a href="../index.php">Home</a>
+                    <a href="../news/news.php">News</a>
+                    <a href="../contact/contact.php">Contact</a>
+                    <a href="" class="page-actuelle">Mentions légales</a>
                 </div>
             </nav>
             <header>
@@ -58,21 +61,18 @@
                     <a href="" class="lettre">Z</a>
                 </div>
             </nav>
-            <h2 class="title title-page">Contact</h2>
-            <div class="form-container">
-                    <form action="" method="GET" class="form-content">
-                        <label for="nom" class="subtitle label">Nom *</label>
-                        <input type="text" name="nom" id="nom" required class="form-input input">
-                        <label for="mail" class="subtitle label">Adresse Email *</label>
-                        <input type="text" name="mail" id="mail" required class="form-input input">
-                        <label for="message" class="subtitle label">Message *</label>
-                        <textarea name="message" id="message" cols="50" rows="100" class="form-input textarea"></textarea>
-                        <!-- <button class="g-recaptcha" data-sitekey="6Ld_i6wZAAAAAGkBmrKQiwm4kSKIDqlybpZgHcqp" data-callback='onSubmit'
-                            data-action='submit'>Submit</button> -->
-                        <button class="form-button subtitle">ENVOYER</button>
-                    </form>
-                
+            <h2 class="title title-page">Mentions légales</h2>
+            <!-- mt=Mentions légales -->
+            <div class="mt-container">
+                <div class="mt-content">
+                    <h3 class="subtitle mt-title">Hébergement</h3>
+                    <p>1&1 Internet SARL</p>
+                    <p>7, place de la Gare</p>
+                    <p>BP 70109</p>
+                    <p>57201 Sarreguemines Cedex</p>
+                </div>
             </div>
+
             <footer>
                 <div class="footer-content">
                     <div class="footer-content-left">
@@ -90,14 +90,11 @@
                     </div>
                 </div>
             </footer>
+
         </div>
     </main>
 
-    <script src="../assets/app.js"></script>
-    <script>
-        function onSubmit(token) {
-          document.getElementById("demo-form").submit();
-        }
-      </script>
+    <script src="assets/app.js"></script>
 </body>
+
 </html>
