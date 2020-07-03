@@ -1,12 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Généré le :  Ven 03 Juillet 2020 à 06:40
--- Version du serveur :  5.5.62-0+deb8u1-log
--- Version de PHP :  7.0.33-0+deb9u7
+-- Hôte : 127.0.0.1
+-- Généré le : ven. 03 juil. 2020 à 15:21
+-- Version du serveur :  10.4.13-MariaDB
+-- Version de PHP : 7.4.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -15,6 +17,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de données : `wea_demo_db`
+--
 
 -- --------------------------------------------------------
 
@@ -45,7 +50,7 @@ CREATE TABLE `wea_definition` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `wea_definition`
+-- Déchargement des données de la table `wea_definition`
 --
 
 INSERT INTO `wea_definition` (`id_definition`, `mot_id`, `titre`, `texte`, `source`, `commentaire`) VALUES
@@ -67,7 +72,7 @@ CREATE TABLE `wea_image` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `wea_image`
+-- Déchargement des données de la table `wea_image`
 --
 
 INSERT INTO `wea_image` (`id_image`, `nom`, `alt`, `url_image`, `accueil`) VALUES
@@ -90,7 +95,7 @@ CREATE TABLE `wea_lettre` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `wea_lettre`
+-- Déchargement des données de la table `wea_lettre`
 --
 
 INSERT INTO `wea_lettre` (`id_lettre`, `lettre`, `description_lettre`) VALUES
@@ -116,7 +121,7 @@ CREATE TABLE `wea_mot` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `wea_mot`
+-- Déchargement des données de la table `wea_mot`
 --
 
 INSERT INTO `wea_mot` (`id_mot`, `lettre_id`, `mot`, `description`, `mot_ref`) VALUES
@@ -134,11 +139,11 @@ CREATE TABLE `wea_news` (
   `image_id` int(10) DEFAULT NULL,
   `titre_news` varchar(255) NOT NULL,
   `texte_news` text NOT NULL,
-  `date_news` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `date_news` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `wea_news`
+-- Déchargement des données de la table `wea_news`
 --
 
 INSERT INTO `wea_news` (`id_news`, `image_id`, `titre_news`, `texte_news`, `date_news`) VALUES
@@ -154,24 +159,25 @@ INSERT INTO `wea_news` (`id_news`, `image_id`, `titre_news`, `texte_news`, `date
 
 CREATE TABLE `wea_parametre` (
   `id_param` int(10) NOT NULL,
-  `titre_site` varchar(255) NOT NULL,
-  `titre_home_presentation` varchar(255) NOT NULL,
-  `home_presentation` text NOT NULL,
+  `titre_site` varchar(255) DEFAULT NULL,
+  `titre_home_presentation` varchar(255) DEFAULT NULL,
+  `home_presentation` text DEFAULT NULL,
   `url_logo` varchar(255) DEFAULT NULL,
-  `titre_mentions_legales` varchar(255) NOT NULL,
-  `texte_mentions_legales` text NOT NULL,
+  `plan_site` varchar(255) DEFAULT NULL,
+  `titre_mentions_legales` varchar(255) DEFAULT NULL,
+  `texte_mentions_legales` text DEFAULT NULL,
   `url_compte_twitter` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `wea_parametre`
+-- Déchargement des données de la table `wea_parametre`
 --
 
-INSERT INTO `wea_parametre` (`id_param`, `titre_site`, `titre_home_presentation`, `home_presentation`, `url_logo`, `titre_mentions_legales`, `texte_mentions_legales`, `url_compte_twitter`) VALUES
-(1, 'L’encyclopédie de la Cité des dames', 'Présentation de l’encyclopédie de la Cité des dames', '<p>Ce site est conçu comme une démonstration du système de gestion de contenus <a href=\"https://github.com/Shuitaa/WEA\">WEA</a> de Pierre Averty, dans le cadre d’un stage pour le projet <a href=\"http://citedesdames.hypotheses.org\"><i>Cité des dames : créatrices dans la cité</i></a> de l’université Gustave Eiffel.</p>', NULL, 'Mentions légales du projet WEA', '<ul>\r\n<li>Développement du CMS : Pierre Averty</li>\r\n<li>Contenu (textes et images) : Philippe Gambette</li>\r\n</ul>', NULL);
+INSERT INTO `wea_parametre` (`id_param`, `titre_site`, `titre_home_presentation`, `home_presentation`, `url_logo`, `plan_site`, `titre_mentions_legales`, `texte_mentions_legales`, `url_compte_twitter`) VALUES
+(1, 'L\'encyclopédie de la Cité des dames', 'Présentation de l’encyclopédie de la Cité des dames', '<p>Ce site est conçu comme une démonstration du système de gestion de contenus <a href=\"https://github.com/Shuitaa/WEA\">WEA</a> de Pierre Averty, dans le cadre d’un stage pour le projet <a href=\"http://citedesdames.hypotheses.org\"><i>Cité des dames : créatrices dans la cité</i></a> de l’université Gustave Eiffel.</p>', NULL, NULL, 'Mentions légales du projet WEA', '<ul>\r\n<li>Développement du CMS : Pierre Averty</li>\r\n<li>Contenu (textes et images) : Philippe Gambette</li>\r\n</ul>', NULL);
 
 --
--- Index pour les tables exportées
+-- Index pour les tables déchargées
 --
 
 --
@@ -217,7 +223,7 @@ ALTER TABLE `wea_parametre`
   ADD PRIMARY KEY (`id_param`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -225,36 +231,44 @@ ALTER TABLE `wea_parametre`
 --
 ALTER TABLE `wea_contact`
   MODIFY `id_contact` int(10) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT pour la table `wea_definition`
 --
 ALTER TABLE `wea_definition`
   MODIFY `id_definition` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT pour la table `wea_image`
 --
 ALTER TABLE `wea_image`
   MODIFY `id_image` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT pour la table `wea_lettre`
 --
 ALTER TABLE `wea_lettre`
   MODIFY `id_lettre` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT pour la table `wea_mot`
 --
 ALTER TABLE `wea_mot`
   MODIFY `id_mot` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT pour la table `wea_news`
 --
 ALTER TABLE `wea_news`
   MODIFY `id_news` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT pour la table `wea_parametre`
 --
 ALTER TABLE `wea_parametre`
   MODIFY `id_param` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
