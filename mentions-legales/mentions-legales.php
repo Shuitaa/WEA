@@ -14,7 +14,7 @@
 <body>
 
     <?php 
-        $stmt_param = $db -> prepare("SELECT titre_site, url_logo FROM wea_parametre");
+        $stmt_param = $db -> prepare("SELECT titre_site, url_logo, titre_mentions_legales, texte_mentions_legales FROM wea_parametre");
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
     ?>
@@ -45,45 +45,46 @@
             </header>
             <nav class="nav-lettre-container">
                 <div class="nav-lettre nav-lettre-content-1">
-                    <a href="" class="lettre link">A</a>
-                    <a href="" class="lettre link">B</a>
-                    <a href="" class="lettre link">C</a>
-                    <a href="" class="lettre link">D</a>
-                    <a href="" class="lettre link">E</a>
-                    <a href="" class="lettre link">F</a>
-                    <a href="" class="lettre link">G</a>
-                    <a href="" class="lettre link">H</a>
-                    <a href="" class="lettre link">I</a>
-                    <a href="" class="lettre link">J</a>
-                    <a href="" class="lettre link">K</a>
-                    <a href="" class="lettre link">L</a>
-                    <a href="" class="lettre link">M</a>
-                    <a href="" class="lettre link">N</a>
-                    <a href="" class="lettre link">O</a>
-                    <a href="" class="lettre link">P</a>
-                    <a href="" class="lettre link">Q</a>
-                    <a href="" class="lettre link">R</a>
-                    <a href="" class="lettre link">S</a>
-                    <a href="" class="lettre link">T</a>
-                    <a href="" class="lettre link">U</a>
-                    <a href="" class="lettre link">V</a>
-                    <a href="" class="lettre link">W</a>
+                    <a href="../lettre/lettre.php?lettre=a" class="lettre link">A</a>
+                    <a href="../lettre/lettre.php?lettre=b" class="lettre link">B</a>
+                    <a href="../lettre/lettre.php?lettre=c" class="lettre link">C</a>
+                    <a href="../lettre/lettre.php?lettre=d" class="lettre link">D</a>
+                    <a href="../lettre/lettre.php?lettre=e" class="lettre link">E</a>
+                    <a href="../lettre/lettre.php?lettre=f" class="lettre link">F</a>
+                    <a href="../lettre/lettre.php?lettre=g" class="lettre link">G</a>
+                    <a href="../lettre/lettre.php?lettre=h" class="lettre link">H</a>
+                    <a href="../lettre/lettre.php?lettre=i" class="lettre link">I</a>
+                    <a href="../lettre/lettre.php?lettre=j" class="lettre link">J</a>
+                    <a href="../lettre/lettre.php?lettre=k" class="lettre link">K</a>
+                    <a href="../lettre/lettre.php?lettre=l" class="lettre link">L</a>
+                    <a href="../lettre/lettre.php?lettre=m" class="lettre link">M</a>
+                    <a href="../lettre/lettre.php?lettre=n" class="lettre link">N</a>
+                    <a href="../lettre/lettre.php?lettre=o" class="lettre link">O</a>
+                    <a href="../lettre/lettre.php?lettre=p" class="lettre link">P</a>
+                    <a href="../lettre/lettre.php?lettre=q" class="lettre link">Q</a>
+                    <a href="../lettre/lettre.php?lettre=r" class="lettre link">R</a>
+                    <a href="../lettre/lettre.php?lettre=s" class="lettre link">S</a>
+                    <a href="../lettre/lettre.php?lettre=t" class="lettre link">T</a>
+                    <a href="../lettre/lettre.php?lettre=u" class="lettre link">U</a>
+                    <a href="../lettre/lettre.php?lettre=v" class="lettre link">V</a>
+                    <a href="../lettre/lettre.php?lettre=w" class="lettre link">W</a>
                 </div>
                 <div class="nav-lettre nav-lettre-content-2">
-                    <a href="" class="lettre link">X</a>
-                    <a href="" class="lettre link">Y</a>
-                    <a href="" class="lettre link">Z</a>
+                    <a href="../lettre/lettre.php?lettre=x" class="lettre link">X</a>
+                    <a href="../lettre/lettre.php?lettre=y" class="lettre link">Y</a>
+                    <a href="../lettre/lettre.php?lettre=z" class="lettre link">Z</a>
                 </div>
             </nav>
             <h2 class="title title-page">Mentions légales</h2>
             <!-- mt=Mentions légales -->
             <div class="mt-container">
                 <div class="mt-content">
-                    <h3 class="subtitle mt-title">Hébergement</h3>
-                    <p>1&1 Internet SARL</p>
-                    <p>7, place de la Gare</p>
-                    <p>BP 70109</p>
-                    <p>57201 Sarreguemines Cedex</p>
+                    <?php
+                        echo('
+                            <h3 class="subtitle mt-title">'.$data_param['titre_mentions_legales'].'</h3>
+                            '.$data_param['texte_mentions_legales'].'
+                        ');
+                    ?>
                 </div>
             </div>
 

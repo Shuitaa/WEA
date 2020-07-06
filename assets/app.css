@@ -29,6 +29,22 @@ header {
     margin-top: 25px;
     width: 100%;
 }
+li {
+    list-style: none;
+}
+.list {
+    list-style: none;
+    margin-top: 15px;
+    display: block;
+    font-size: 1.618rem;
+}
+ul {
+    padding: 0;
+    margin: 0;
+}
+.list:first-child {
+    margin-top: 0;
+}
 a {
     color: #000000;
     text-decoration: none;
@@ -138,14 +154,10 @@ footer {
 }
 .footer-content {
     width: 750px;
+    display: flex;
+    justify-content: space-between;
     margin: 0 auto 0 auto;
     font-size: 0.61rem;
-}
-.footer-content-left {
-    float: left;
-}
-.footer-content-right {
-    float : right;
 }
 .footer-content-left-bottom {
     display: block;
@@ -166,10 +178,17 @@ footer {
     margin: 0 auto 0 auto;
     width: 656px;
 }
-.img {
+.home-img-container {
     margin-top: 5px;
     width: 110px;
     height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.img {
+    width: 100%;
 }
 .home-presentation-container {
     margin-top: 100px;
@@ -224,9 +243,18 @@ footer {
 .news-container:first-child {
     margin-top: 0;
 }
-.news-img {
+.news-img-container {
     float: left;
     margin: 0 25px 18px 0;
+    display: flex;
+    width: 209px;
+    height: 278px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.news-img {
+    height: 100%;
 }
 .news-date {
     display: block;
@@ -295,5 +323,63 @@ input {
 }
 .mt-content {
     margin: 0 auto 0 125px;
-    width: 225px;
+}
+
+
+.description-lettre {
+    font-weight: 400;
+    margin: 0;
+    font-size: 1rem;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.list-container {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.list-content {
+    margin: 0 auto 0 125px;
+}
+.list-a {
+    font-weight: 400;
+    color: #535353;
+}
+
+
+.definition {
+    margin-top: 0;
+}
+.defintion-container {
+    margin-top: 45px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.definition-text,.definition-comment {
+    margin: 0px auto 0 auto;
+    width: 880px;
+}
+.definition-title-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+}
+.definition-title {
+    margin: 0 auto 0 125px;
+    font-size: 2.618rem;
+    font-weight: 400;
+}
+.definition-text {
+    margin-top: 45px;
+}
+.definition-source {
+    margin: 15px 30px 0 125px;
+}
+.definition-comment {
+    margin-top: 15px;
 }

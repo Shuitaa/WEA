@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'encyclopédie des femmes - Contact</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>L'encyclopédie des femmes - <?php echo strtoupper($_GET['mot']) ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <?php require ("../assets/secret.php");?>
 </head>
+
 <body>
 
-    <?php 
+    <?php
+
+    $get_mot = htmlspecialchars($_GET['mot'],ENT_HTML5);
+
+    if(isset($get_mot) AND !empty($get_mot)) {
         $stmt_param = $db -> prepare("SELECT titre_site, url_logo FROM wea_parametre");
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
+
+        $stmt_mot = $db -> prepare("SELECT id_mot, lettre_id, mot, `description` FROM wea_mot WHERE mot = ?");
+        $stmt_mot -> execute(array($get_mot));
+        $data_mot = $stmt_mot -> fetch();
+
+        $stmt_definition = $db -> prepare("SELECT titre, texte, source, commentaire FROM wea_definition, wea_mot WHERE id_mot = mot_id AND mot = ?");
+        $stmt_definition -> execute(array($get_mot));
+    }
     ?>
-    
-    
+
     <main>
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
                     <a href="../index.php" class="link">Home</a>
                     <a href="../news/news.php" class="link">News</a>
-                    <a href=""  class="page-actuelle">Contact</a>
+                    <a href="../contact/contact.php" class="link">Contact</a>
                     <a href="../mentions-legales/mentions-legales.php" class="link">Mentions légales</a>
                 </div>
             </nav>
             <header>
                 <div class="header-content">
-                <?php
+                    <?php
                 if( $data_param['url_logo'] !== NULL AND $data_param['titre_site'] !== NULL) {
                      echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
                      echo('<h1 class="titre-home-presentation-left title">'.$data_param['titre_site'].'</h1>');
@@ -74,20 +88,50 @@
                     <a href="../lettre/lettre.php?lettre=z" class="lettre link">Z</a>
                 </div>
             </nav>
-            <h2 class="title title-page">Contact</h2>
-            <div class="form-container">
-                    <form action="" method="GET" class="form-content">
-                        <label for="nom" class="subtitle label">Nom *</label>
-                        <input type="text" name="nom" id="nom" required class="form-input input">
-                        <label for="mail" class="subtitle label">Adresse Email *</label>
-                        <input type="text" name="mail" id="mail" required class="form-input input">
-                        <label for="message" class="subtitle label">Message *</label>
-                        <textarea name="message" id="message" cols="50" rows="100" class="form-input textarea"></textarea>
-                        <!-- <button class="g-recaptcha" data-sitekey="6Ld_i6wZAAAAAGkBmrKQiwm4kSKIDqlybpZgHcqp" data-callback='onSubmit'
-                            data-action='submit'>Submit</button> -->
-                        <button class="form-button subtitle">ENVOYER</button>
-                    </form>
-                
+            <div class="title-page">
+                <h2 class="title "><?php echo $data_mot['mot'] ?></h2>
+                <?php
+                if($data_mot['description'] !== NULL ){ 
+                    echo('
+                        <h3 class="description-lettre">'.$data_mot['description'].'</h3>
+                    ');
+                }
+                ?>
+            </div>
+            <div class="list-container definition">
+                    <ul>
+                        <?php
+                            while($data_definition = $stmt_definition -> fetch()) { 
+                                echo ('
+                                    <div class="defintion-container">');
+                                            if($data_definition['titre'] !== NULL) {
+                                                echo('
+                                                <div class="definition-title-container">
+                                                    <h2 class="definition-title">'.$data_definition['titre'].'</h2>
+                                                </div>
+                                                ');
+                                            }
+                                            if($data_definition['texte'] !== NULL){
+                                                echo('
+                                                <p class="definition-text">'.$data_definition['texte'].'</p>
+                                                ');
+                                            }
+                                            if($data_definition['source'] !== NULL){
+                                                echo('
+                                                    <p class="definition-source">'.$data_definition['source'].'</p>
+                                                ');
+                                            }
+                                            if($data_definition['commentaire'] !== NULL){
+                                                echo('
+                                                    <p class="definition-comment">'.$data_definition['commentaire'].'</p>
+                                                ');
+                                            }
+                                            echo('
+                                    </div>
+                                ');
+                            }
+                        ?>
+                    </ul>
             </div>
             <footer>
                 <div class="footer-content">
@@ -114,10 +158,6 @@
     </main>
 
     <script src="../assets/app.js"></script>
-    <script>
-        function onSubmit(token) {
-          document.getElementById("demo-form").submit();
-        }
-      </script>
 </body>
+
 </html>

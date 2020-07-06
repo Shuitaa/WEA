@@ -1,36 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'encyclopédie des femmes - Contact</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>L'encyclopédie des femmes - <?php echo strtoupper($_GET['lettre']) ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
-    <script src="https://www.google.com/recaptcha/api.js"></script>
     <?php require ("../assets/secret.php");?>
 </head>
+
 <body>
 
-    <?php 
-        $stmt_param = $db -> prepare("SELECT titre_site, url_logo FROM wea_parametre");
-        $stmt_param -> execute();
-        $data_param = $stmt_param -> fetch();
+    <?php
+
+        $get_lettre = htmlspecialchars($_GET['lettre'],ENT_HTML5);
+
+        if(isset($get_lettre) AND !empty($get_lettre)) {
+            $stmt_param = $db -> prepare("SELECT titre_site, url_logo FROM wea_parametre");
+            $stmt_param -> execute();
+            $data_param = $stmt_param -> fetch();
+
+            $stmt_letter = $db -> prepare("SELECT lettre, description_lettre FROM wea_lettre WHERE lettre = ?");
+            $stmt_letter -> execute(array($get_lettre));
+            $data_letter = $stmt_letter -> fetch();
+
+            $stmt_mot = $db -> prepare("SELECT mot FROM wea_lettre, wea_mot WHERE id_lettre = lettre_id AND lettre = ?");
+            $stmt_mot -> execute(array($get_lettre));
+        }
     ?>
-    
-    
+
     <main>
         <div class="container">
             <nav class="nav-menu">
                 <div class="nav-menu-content">
                     <a href="../index.php" class="link">Home</a>
                     <a href="../news/news.php" class="link">News</a>
-                    <a href=""  class="page-actuelle">Contact</a>
+                    <a href="../contact/contact.php" class="link">Contact</a>
                     <a href="../mentions-legales/mentions-legales.php" class="link">Mentions légales</a>
                 </div>
             </nav>
             <header>
                 <div class="header-content">
-                <?php
+                    <?php
                 if( $data_param['url_logo'] !== NULL AND $data_param['titre_site'] !== NULL) {
                      echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
                      echo('<h1 class="titre-home-presentation-left title">'.$data_param['titre_site'].'</h1>');
@@ -74,20 +88,26 @@
                     <a href="../lettre/lettre.php?lettre=z" class="lettre link">Z</a>
                 </div>
             </nav>
-            <h2 class="title title-page">Contact</h2>
-            <div class="form-container">
-                    <form action="" method="GET" class="form-content">
-                        <label for="nom" class="subtitle label">Nom *</label>
-                        <input type="text" name="nom" id="nom" required class="form-input input">
-                        <label for="mail" class="subtitle label">Adresse Email *</label>
-                        <input type="text" name="mail" id="mail" required class="form-input input">
-                        <label for="message" class="subtitle label">Message *</label>
-                        <textarea name="message" id="message" cols="50" rows="100" class="form-input textarea"></textarea>
-                        <!-- <button class="g-recaptcha" data-sitekey="6Ld_i6wZAAAAAGkBmrKQiwm4kSKIDqlybpZgHcqp" data-callback='onSubmit'
-                            data-action='submit'>Submit</button> -->
-                        <button class="form-button subtitle">ENVOYER</button>
-                    </form>
-                
+            <div class="title-page">
+                <h2 class="title "><?php echo strtoupper($data_letter['lettre']) ?></h2>
+                <?php
+                if($data_letter['description_lettre'] !== NULL ){ 
+                    echo('
+                        <h3 class="description-lettre">'.$data_letter['description_lettre'].'</h3>
+                    ');
+                }
+                ?>
+            </div>
+            <div class="list-container">
+                <div class="list-content">
+                    <ul>
+                        <?php
+                            while($data_mot = $stmt_mot -> fetch()) { 
+                                echo ('<li class="list"><a href="../mot/mot.php?mot='.$data_mot['mot'].'" class="list-a">'.$data_mot['mot'].'</a></li>');
+                            }
+                        ?>
+                    </ul>
+                </div>
             </div>
             <footer>
                 <div class="footer-content">
@@ -114,10 +134,6 @@
     </main>
 
     <script src="../assets/app.js"></script>
-    <script>
-        function onSubmit(token) {
-          document.getElementById("demo-form").submit();
-        }
-      </script>
 </body>
+
 </html>
