@@ -16,18 +16,8 @@
         <h1 class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">Interface d'administration de
             WEA</h1>
 
-        <div class="hadow-sm p-3 mb-5 bg-white rounded mt-4">
+        <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
             <h1 class="d-flex justify-content-center">Paramètres Globaux</h1>
-
-            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Adresse Mail</span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default">
-                </div>
-            </div>
 
             <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
                 <div class="input-group">
@@ -48,9 +38,39 @@
                         aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
+
+            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Adresse Mail</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+
+            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">URL compte twitter</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+
+            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Token reCaptcha</span>
+                    </div>
+                    <input type="text" class="form-control" aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
         </div>
 
-        <div class="hadow-sm p-3 mb-5 bg-white rounded mt-4">
+        <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
         <h1 class="d-flex justify-content-center">Paramètres de la page Home</h1>
             <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
                 <div class="input-group">

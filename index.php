@@ -41,7 +41,7 @@
                 } else if( $data_param['url_logo'] === NULL ) {
                       echo('<h1 class="titre-home-presentation-center title">'.$data_param['titre_site'].'</h1>');
                 } else if ($data_param['titre_site'] === NULL) {
-                    echo('<img src="../'.$data_param['url_logo'].'" alt="logo" class="logo">');
+                    echo('<img src="'.$data_param['url_logo'].'" alt="logo" class="logo">');
                 };
                      ?>
                 </div>
