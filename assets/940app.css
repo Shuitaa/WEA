@@ -1,0 +1,98 @@
+.title {
+    font-size: 2.618rem;
+}
+.img-container {
+    display: none;
+}
+.title-page {
+    margin: 45px auto 0 auto ;
+}
+.container {
+    width: 100vw;
+}
+.nav-menu-content {
+    width: 57.66vw;
+}
+.logo {
+    width: 16.80vw;
+    height: 16.80vw;
+    margin-right: 2.66vw;
+}
+.titre-home-presentation-left {
+    width: 55.95vw;
+    text-align: center;
+}
+.titre-home-presentation-center {
+    width: 55.95vw;
+}
+.nav-lettre-content-1 {
+    width: 82.94vw;
+}
+.nav-lettre-content-2 {
+    width: 9.02vw;
+}
+.footer-content {
+    width: 79.79vw;
+}
+.home-presentation-content {
+    width: 93.62vw;
+}
+.home-presentation-subtitle {
+    margin-left : auto; 
+    text-align: center;
+}
+
+
+
+.news-content {
+    width: 93.61vw;
+}
+.news-img-container {
+    width: 22.23vw;
+    height: 29.57vw;
+}
+
+
+.form-content{
+    margin: 0 auto 0 13.3vw;
+    width: 74.47vw;
+}
+input {
+    height: 32px;
+    width: 37.23vw;
+}
+.form-button {
+    padding: 0;
+    margin-left: 50.21vw;
+    width: 21.27vw;
+    cursor: pointer;
+}
+
+
+
+.mt-content {
+    margin: 0 auto 0 13.3vw;
+}
+
+
+.title-page {
+    width: 90vw;
+}
+.description-lettre {
+    margin-left: 1.06vw;
+}
+.list-content {
+    margin: 0 auto 0 13.3vw;
+}
+
+
+
+.definition-text,.definition-comment {
+    width: 93.61vw;
+}
+.definition-title {
+    margin: 0 auto 0 13.3vw;
+}
+.definition-source {
+    margin: 15px 3.19vw 0 13.3vw;
+}

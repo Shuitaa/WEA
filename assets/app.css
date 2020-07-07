@@ -92,21 +92,17 @@ p {
 }
 
 .nav-menu {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
     width: 100%;
 }
 .nav-menu-content {
     display: flex;
     justify-content: space-between;
-    margin: 0 199px 0 199px;
+    margin: 0 auto 0 auto;
     width: 542px;
 }
 .header-content {
     margin: 45px auto 0 auto;
     display: flex;
-    flex-direction: row;
     align-items: center;
 }
 .logo {
@@ -117,12 +113,12 @@ p {
 
 .titre-home-presentation-left {
     margin-top: -5px;
-    width: 526px;                                                                                                     ;
+    width: 526px;
     text-align: left;
 }
 .titre-home-presentation-center {
     margin-top: -5px;
-    width: 526px;                                                                                                     ;
+    width: 526px;
     text-align: center;
 }
 .nav-lettre-container {
@@ -172,7 +168,6 @@ footer {
 }
 .img-content {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 auto 0 auto;

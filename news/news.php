@@ -6,6 +6,8 @@
     <title>L'encyclopédie des femmes - News</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/app.css">
+    <link rel="stylesheet" media="screen and (max-width:940px)" href= ../assets/940app.css>
+    <link rel="stylesheet" media="screen and (max-width:600px)" href= ../assets/600app.css>
     <?php require ("../assets/secret.php");?>
 </head>
 <body>
@@ -15,7 +17,7 @@
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
 
-        $stmt_news = $db -> prepare("SELECT image_id, url_image, alt, titre_news, date_news, texte_news  FROM wea_news, wea_image WHERE image_id IS NULL OR image_id = id_image");
+        $stmt_news = $db -> prepare("SELECT  image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image");
         $stmt_news -> execute();
     ?>
     

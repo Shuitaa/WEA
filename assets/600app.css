@@ -1,0 +1,41 @@
+body {
+    overflow-x: hidden ;
+    background-color: #FFFFFF;
+}
+.title {
+    font-size: 1.618rem;
+}
+.subtitle {
+    font-size: 1rem;
+}
+main {
+    padding: 0;
+}
+.nav-lettre-content-1 {
+    width: 90vw;
+}
+.nav-lettre-content-2 {
+    margin: 10px auto 0 auto;
+    width: 12vw;
+}
+.nav-menu-content {
+    width: 90vw;
+}
+.header-content {
+    width: 90vw;
+    justify-content: space-between;
+}
+.titre-home-presentation-left {
+    width: 70vw;
+    text-align: center;
+}
+.titre-home-presentation-center {
+    width: 70vw;
+}
+
+
+.twitter-content {
+    margin: 0 auto 0 auto;
+    width: 90vw;
+    height: 300px;
+}
