@@ -82,7 +82,7 @@
                 if ( $data_param['url_compte_twitter'] !== NULL ){
                 echo('<article class="twitter-container">
                         <div class="twitter-content">
-                            <a class="twitter-timeline" href="https://twitter.com/encycloDfemmes?ref_src=twsrc%5Etfw" data-height="302"data-chrome="noheader nofooter noborders transparent"></a>
+                            <a class="twitter-timeline" href="'.$data_param['url_compte_twitter'].'?ref_src=twsrc%5Etfw" data-height="302"data-chrome="noheader nofooter noborders transparent"></a>
                         </div>
                         <div class="media-button">
                             <a href="">Contact</a>
