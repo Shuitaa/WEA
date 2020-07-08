@@ -78,7 +78,7 @@
             </nav>
             <h2 class="title title-page">Contact</h2>
             <div class="form-container">
-                    <form action="" method="GET" class="form-content">
+                    <form action="../assets/app.php" method="GET" class="form-content">
                         <label for="nom" class="subtitle label">Nom *</label>
                         <input type="text" name="nom" id="nom" required class="form-input input">
                         <label for="mail" class="subtitle label">Adresse Email *</label>

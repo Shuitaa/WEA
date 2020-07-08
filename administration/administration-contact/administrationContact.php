@@ -10,12 +10,17 @@
     <link rel="stylesheet" href="../../node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
     <?php require ("../../assets/secret.php");?>
 </head>
-<body  class="bg-light">
-<div class="container">
-<h1 class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">Interface d'administration de
-        WEA</h1>
-    <div class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+<body class="bg-light">
+    <?php 
+        $stmt_msg = $db -> prepare("SELECT  nom, mail, `message`  FROM wea_contact");
+        $stmt_msg -> execute();
+    ?>
+    <div class="container">
+        <h1 class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">Interface d'administration de
+            WEA</h1>
+        <div class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">WEA</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,5 +46,21 @@
                     </ul>
                 </div>
             </nav>
+
+        </div>
+        <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
+            <h1 class="d-flex justify-content-center">Derniers messages reçus</h1>
+        </div>
+
+        <?php
+        while( $data_msg = $stmt_msg -> fetch()){
+        echo('
+            <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
+                <h1>'.$data_msg['nom'].'</h1>
+                <h2>'.$data_msg['mail'].'</h2>
+                <p>'.$data_msg['message'].'</p>
+            </div>
+        ');
+        }
+        ?>
     </div>
-</div>
