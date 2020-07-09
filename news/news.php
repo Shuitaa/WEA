@@ -17,7 +17,7 @@
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
 
-        $stmt_news = $db -> prepare("SELECT  image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image");
+        $stmt_news = $db -> prepare("SELECT  image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image ORDER BY date_news DESC");
         $stmt_news -> execute();
     ?>
     

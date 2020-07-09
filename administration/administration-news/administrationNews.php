@@ -14,7 +14,7 @@
 <body class="bg-light">
 
     <?php 
-        $stmt_news = $db -> prepare("SELECT  image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image");
+        $stmt_news = $db -> prepare("SELECT  id_news, image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image ORDER BY date_news DESC");
         $stmt_news -> execute();
     ?>
 
@@ -53,6 +53,7 @@
             <h1 class="d-flex justify-content-center">Paramètres de la page News</h1>
         </div>
 
+        <form action="../adminApp.php?form=news_add" method="post">
         <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
             <h1 class="d-flex justify-content-center">Ajouter une actualité</h1>
 
@@ -72,7 +73,7 @@
                         <span class="input-group-text" id="inputGroup-sizing-default">Date de l'actualité :</span>
                     </div>
                     <input type="date" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" name="titre_news">
+                        aria-describedby="inputGroup-sizing-default" name="date_news">
                 </div>
             </div>
 
@@ -98,55 +99,50 @@
                 <button class="btn btn-light shadow-sm">Valider</button>
             </div>
         </div>
+        </form>
 
-        <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
+        <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4 mb-5">
             <h1 class="d-flex justify-content-center">Modifier/supprimer une actualité</h1>
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <?php
+                while( $data_news = $stmt_news -> fetch() ) {
+                echo('
+                <ul class="nav nav-pills shadow-sm rounded mb-3 mt-5 p-2 bg-light" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home-'.$data_news['id_news'].'" role="tab"
                         aria-controls="pills-home" aria-selected="true">Actualité</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile-'.$data_news['id_news'].'" role="tab"
                         aria-controls="pills-profile" aria-selected="false">Modifier</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link text-danger" href="#pills-contact" role="tab" aria-controls="pills-contact"
+                    <a class="nav-link text-danger" href="../adminApp.php?form=news_suppr&id='.$data_news['id_news'].'" role="tab" aria-controls="pills-contact"
                         aria-selected="false">Supprimer</a>
                 </li>
             </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <?php
-            while( $data_news = $stmt_news -> fetch() ){
-                echo('
-                     <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
-                         <div class="input-group">
-                             <div class="input-group-prepend">
-                                 <div class="input-group-text">
-                                     <input name="news-modif" type="radio" aria-label="Radio button for following text input">
-                                 </div>
-                             </div>
-                             <div class="container shadow-sm p-3 mb-1 bg-white rounded mt-4">
+            <div class="tab-content" id="pills-tabContent1">
+                <div class="tab-pane fade show active" id="pills-home-'.$data_news['id_news'].'" role="tabpanel" aria-labelledby="pills-home-tab">
+                    <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                        <div class="input-group">
 
-                                 <h1>'.$data_news['titre_news'].'</h1>
-                                 <h2>'.$data_news['date_news'].'</h2>
-                                 <p>'.$data_news['texte_news'].'</p>
+                            <div class="container shadow-sm p-3 mb-1 bg-white rounded mt-4">
 
-                             </div>
-                         </div>
-                     </div>
-            ');
-            }
-            ?></div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <h1>'.$data_news['titre_news'].'</h1>
+                                <h2>'.$data_news['date_news'].'</h2>
+                                <p>'.$data_news['texte_news'].'</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile-'.$data_news['id_news'].'" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
                         <h1 class="d-flex justify-content-center">Modifier une actualité</h1>
 
                         <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Titre de l'actualité
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Titre de l\'actualité
                                         :</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Sizing example input"
@@ -157,7 +153,7 @@
                         <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
                             <div class="input-group">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroup-sizing-default">Date de l'actualité
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Date de l\'actualité
                                         :</span>
                                 </div>
                                 <input type="date" class="form-control" aria-label="Sizing example input"
@@ -180,18 +176,20 @@
 
                         <div class="container shadow-sm p-3  bg-light rounded mt-4">
                             <h1 class="pl-2 input-group-text">Texte :</h1>
-                            <div id="editor-news-modif">
+                            <div id="editor-news-modif-'.$data_news['id_news'].'">
                             </div>
                         </div>
+                        <div class="d-flex justify-content-center mt-3 ">
+                        <button class="btn btn-light shadow-sm">Valider</button>
+                    </div>
+        
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...
-                </div>
             </div>
-            <div class="d-flex justify-content-center mt-3 ">
-                <button class="btn btn-light shadow-sm">Valider</button>
-            </div>
-
+        
+            ');
+        }
+            ?>
 
         </div>
 
@@ -204,7 +202,13 @@
     <script>
         $(function () {
             $('#editor-news').trumbowyg();
-            $('#editor-news-modif').trumbowyg();
+            let i = 1;
+            $('div').each(function () {
+                if ($(this).attr('id') === `editor-news-modif-${i}`) {
+                    $(`#editor-news-modif-${i}`).trumbowyg();
+                    i++
+                }
+            });
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

@@ -45,7 +45,7 @@
             </nav>
         </div>
 
-        <form action="adminApp.php" method="POST">
+        <form action="adminApp.php?form=global" method="POST">
             <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
                 <h1 class="d-flex justify-content-center">Paramètres globaux</h1>
             </div>
