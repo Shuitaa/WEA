@@ -13,7 +13,7 @@
 
 <body class="bg-light">
     <?php 
-        $stmt_msg = $db -> prepare("SELECT  nom, mail, `message`  FROM wea_contact");
+        $stmt_msg = $db -> prepare("SELECT  id_contact, nom, mail, `message`  FROM wea_contact ORDER BY id_contact DESC");
         $stmt_msg -> execute();
     ?>
     <div class="container">

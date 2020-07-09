@@ -46,6 +46,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_home -> execute(array(":titre_news" => $titre_news, ":date_news" => $date_news, ":texte_news" => $texte_news));
        
     }
+    if(isset($_GET['form']) AND $_GET['form'] === 'news_modif'){
+        $id_news = (int) $_GET['id_article'];
+        $titre_news_modif = NULL;
+        if (isset($_POST['titre_news_modif']) AND $_POST['titre_news_modif'] !== '') {
+            $titre_news_modif = $_POST['titre_news_modif'];
+        }
+        $date_news = NULL;
+        if (isset($_POST['date_news_modif']) AND $_POST['date_news_modif'] !== '') {
+            $date_news_modif = $_POST['date_news_modif'];
+        }
+        $texte_news_modif = NULL;
+        if (isset($_POST['editor-news-modif-'.$id_news.'']) AND $_POST['editor-news-modif-'.$id_news.''] !== '') {
+            $texte_news_modif = $_POST['editor-news-modif-'.$id_news.''];
+        }
+        echo $titre_news_modif;
+        $stmt_home = $db -> prepare("UPDATE wea_news SET titre_news = :titre_news_modif, date_news = :date_news_modif, texte_news = :texte_news_modif WHERE id_news = :id_news");
+        $stmt_home -> execute(array(":titre_news_modif" => $titre_news_modif, ":date_news_modif" => $date_news_modif, ":texte_news_modif" => $texte_news_modif, "id_news" => $id_news));
+       
+    }
 
 } else if(isset($_GET['form']) AND $_GET['form'] === 'news_suppr'){
     $stmt_suppr_article = $db -> prepare("DELETE FROM wea_news WHERE id_news = :id");

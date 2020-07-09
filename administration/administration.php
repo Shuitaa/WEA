@@ -13,6 +13,12 @@
 
 <body class="bg-light">
 
+    <?php 
+                $stmt_param = $db -> prepare("SELECT titre_site, email, url_compte_twitter FROM wea_parametre");
+                $stmt_param -> execute();
+                $data_param = $stmt_param -> fetch();
+    ?>
+
     <div class="container">
         <h1 class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">Interface d'administration de
             WEA</h1>
@@ -56,7 +62,7 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">Nom du site</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" name="nom_site">
+                            aria-describedby="inputGroup-sizing-default" name="nom_site" <?php echo ('value="'.$data_param['titre_site'].'"');?>>
                     </div>
                 </div>
 
@@ -79,7 +85,7 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">Adresse Mail</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" name="email">
+                            aria-describedby="inputGroup-sizing-default" name="email" <?php echo ('value="'.$data_param['email'].'"'); ?>>
                     </div>
                 </div>
 
@@ -89,7 +95,7 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">URL compte twitter</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" name="url_compte_twitter">
+                            aria-describedby="inputGroup-sizing-default" name="url_compte_twitter" <?php echo ('value="'.$data_param['url_compte_twitter'].'"'); ?>>
                     </div>
                 </div>
 

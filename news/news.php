@@ -17,7 +17,7 @@
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
 
-        $stmt_news = $db -> prepare("SELECT  image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image ORDER BY date_news DESC");
+        $stmt_news = $db -> prepare("SELECT  id_news, image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image ORDER BY id_news DESC");
         $stmt_news -> execute();
     ?>
     
@@ -127,30 +127,6 @@
                     };
                 
                 ?>
-                    <!-- <div class="news-content">
-                        <img src="../img/news1-photo.png" alt="" class="news-img">
-                        <h3 class="subtitle">Titre news</h3>
-                        <span class="news-date">Orléans, 19 mars 2020</span>
-                        <div class="news-text">
-                            <p>Tôt ce matin, j’ai essayé de capter l’attention d’un voisin ouvrant ses persiennes de l’autre côté de la rue. J’ai observé sa manœuvre depuis mon jardin, au-delà du toit du garage, de mon mur de façade, de l’étroite rue ; au premier étage, sa main sur la tôle beige, puis son bras repliant le volet, je pensais voir au bout de ce bras, son épaule, son visage, qu’il me voie, et je lui ferais un signe de la main, je montrerais ma présence et j’accueillerais la sienne. Juste un signe, comme un petit salut flottant depuis un train, ou un bateau ou un quai, un geste furtif sans conséquence, puis l’éloignement sans lendemain. Pourquoi ce simple geste, l’envie de faire ce geste, est-elle soudainement tenace ?
-                            J’avais eu le même mouvement d’attente et d’espoir l’après-midi du jour 1, à mafenêtre du premier étage. Je voyais d’autres voisines, une femme, une fille dans unechambre ou un salon, je les voyais bouger et vivre, et, accoudée à ma rambarde defenêtre, j’ai attendu plusieurs minutes qu’une d’elles lève ses yeux vers moi afin depouvoir lui faire un signe, un sourire. Quel est ce besoin de créer un lien ? Une sorte de connivence, une reconnaissance que nous sommes dans le même bateau immobile,à quai.
-                            Aujourd’hui ce serait un signe bien ancré d’une façade à une autre de la petite rueimmobile. Ce salut de la main ne serait pas un salut fugace sans lendemain, car cesinconnus du quai seront encore là demain, et après-demain, puis après tout ça. Un journous parlerons peut-être.</p>
-                            <p>J’ai loupé deux soirs de suite les applaudissements à la fenêtre pour remercier les soignants. Il y a assez peu de maisons et de fenêtres dans ma rue. Nous serions ridicules, comparés aux salves sonores de mains dans les résidences du 15ème arrondissement de Paris.
-                            Mais tout de même, si nous applaudissions ensemble,
-                            les mains de ce voisin invisible,
-                            cette femme et cette fille,
-                            l’un de mes enfants et moi-même,
-                            des gestes de la main avec des lendemains,
-                            je serais submergée de vagues de larmes, dans ma frêle coquille d’humanité.</p>
-                        </div>
-                    </div>
-                    <div class="news-content">
-                        <h3 class="subtitle">Titre news</h3>
-                        <span class="news-date">Orléans, Septembre 2019</span>
-                        <div class="news-text">
-                            <p>Après trois années de quasi silence, l'encyclopédie des femmes reprendra peut-être de la voix, depuis son nouveau quartier général à Orléans. Orléans est belle est pleine de promesses livresques et féministes : librairies, bouquinistes, livres anciens, des associations comme Arts et Littératures au pluriel, Mix Cité 45, le parlement des écrivaines francophones, Nous toutes. De nouveaux portraits et extraits sont en cours d'accrochage dans la galerie des citations de femmes !</p>
-                        </div>
-                    </div> -->
             </div>
             <footer>
                 <div class="footer-content">

@@ -11,6 +11,13 @@
     <?php require ("../../assets/secret.php");?>
 </head>
 <body  class="bg-light">
+
+    <?php 
+            $stmt_param = $db -> prepare("SELECT titre_home_presentation, home_presentation FROM wea_parametre");
+            $stmt_param -> execute();
+            $data_param = $stmt_param -> fetch();
+    ?>
+
 <div class="container">
     <h1 class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">Interface d'administration de
         WEA</h1>
@@ -54,7 +61,7 @@
                             présentation</span>
                     </div>
                     <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" name="titre_presentation">
+                        aria-describedby="inputGroup-sizing-default" name="titre_presentation"<?php echo ('value="'.$data_param['titre_home_presentation'].'"'); ?> >
                 </div>
             </div>
 
@@ -85,11 +92,13 @@
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="../../node_modules/trumbowyg/dist/trumbowyg.min.js"></script>
+
 <script>
     $(function () {
         $('#editor-home').trumbowyg();
     });
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>

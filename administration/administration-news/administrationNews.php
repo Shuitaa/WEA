@@ -14,7 +14,7 @@
 <body class="bg-light">
 
     <?php 
-        $stmt_news = $db -> prepare("SELECT  id_news, image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image ORDER BY date_news DESC");
+        $stmt_news = $db -> prepare("SELECT  id_news, image_id ,url_image, alt, titre_news, date_news, texte_news  FROM wea_news LEFT JOIN wea_image ON wea_news.image_id = wea_image.id_image ORDER BY id_news DESC");
         $stmt_news -> execute();
     ?>
 
@@ -54,51 +54,51 @@
         </div>
 
         <form action="../adminApp.php?form=news_add" method="post">
-        <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
-            <h1 class="d-flex justify-content-center">Ajouter une actualité</h1>
+            <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
+                <h1 class="d-flex justify-content-center">Ajouter une actualité</h1>
 
-            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Titre de l'actualité :</span>
-                    </div>
-                    <input type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" name="titre_news">
-                </div>
-            </div>
-
-            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroup-sizing-default">Date de l'actualité :</span>
-                    </div>
-                    <input type="date" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" name="date_news">
-                </div>
-            </div>
-
-            <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
-                    </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="inputGroupFile01"
-                            aria-describedby="inputGroupFileAddon01" name="url_image">
-                        <label class="custom-file-label" for="inputGroupFile01">Choisir votre logo</label>
+                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Titre de l'actualité :</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name="titre_news">
                     </div>
                 </div>
-            </div>
 
-            <div class="container shadow-sm p-3  bg-light rounded mt-4">
-                <h1 class="pl-2 input-group-text">Texte :</h1>
-                <div id="editor-news">
+                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Date de l'actualité :</span>
+                        </div>
+                        <input type="date" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name="date_news">
+                    </div>
+                </div>
+
+                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Image</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01" name="url_image">
+                            <label class="custom-file-label" for="inputGroupFile01">Choisir votre logo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container shadow-sm p-3  bg-light rounded mt-4">
+                    <h1 class="pl-2 input-group-text">Texte :</h1>
+                    <div id="editor-news">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3 ">
+                    <button class="btn btn-light shadow-sm">Valider</button>
                 </div>
             </div>
-            <div class="d-flex justify-content-center mt-3 ">
-                <button class="btn btn-light shadow-sm">Valider</button>
-            </div>
-        </div>
         </form>
 
         <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4 mb-5">
@@ -125,18 +125,21 @@
                     <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
                         <div class="input-group">
 
-                            <div class="container shadow-sm p-3 mb-1 bg-white rounded mt-4">
+                            <div class="container shadow-sm p-3 mb-1 bg-white rounded mt-4" >
 
-                                <h1>'.$data_news['titre_news'].'</h1>
-                                <h2>'.$data_news['date_news'].'</h2>
-                                <p>'.$data_news['texte_news'].'</p>
+                                <h1 id="title-memo-'.$data_news['id_news'].'">'.$data_news['titre_news'].'</h1>
+                                <h2 id="date-memo-'.$data_news['id_news'].'">'.$data_news['date_news'].'</h2>
+                                <div id="news-'.$data_news['id_news'].'"><p>'.$data_news['texte_news'].'</p></div>
 
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pills-profile-'.$data_news['id_news'].'" role="tabpanel" aria-labelledby="pills-profile-tab">
-                    <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
+                
+                
+                <form method="POST" action="../adminApp.php?form=news_modif&id_article='.$data_news['id_news'].'">    
+                <div class="shadow-sm p-3 mb-1 bg-white rounded mt-4">
                         <h1 class="d-flex justify-content-center">Modifier une actualité</h1>
 
                         <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
@@ -146,7 +149,7 @@
                                         :</span>
                                 </div>
                                 <input type="text" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default" name="titre_news">
+                                    aria-describedby="inputGroup-sizing-default" name="titre_news_modif" id="text-input-'.$data_news['id_news'].'">
                             </div>
                         </div>
 
@@ -157,7 +160,7 @@
                                         :</span>
                                 </div>
                                 <input type="date" class="form-control" aria-label="Sizing example input"
-                                    aria-describedby="inputGroup-sizing-default" name="titre_news">
+                                    aria-describedby="inputGroup-sizing-default" name="date_news_modif">
                             </div>
                         </div>
 
@@ -176,15 +179,17 @@
 
                         <div class="container shadow-sm p-3  bg-light rounded mt-4">
                             <h1 class="pl-2 input-group-text">Texte :</h1>
-                            <div id="editor-news-modif-'.$data_news['id_news'].'">
+                            <div class="editor" id="editor-news-modif-'.$data_news['id_news'].'">
                             </div>
                         </div>
                         <div class="d-flex justify-content-center mt-3 ">
                         <button class="btn btn-light shadow-sm">Valider</button>
                     </div>
+
         
                     </div>
                 </div>
+                </form>
             </div>
         
             ');
@@ -204,10 +209,17 @@
             $('#editor-news').trumbowyg();
             let i = 1;
             $('div').each(function () {
-                if ($(this).attr('id') === `editor-news-modif-${i}`) {
-                    $(`#editor-news-modif-${i}`).trumbowyg();
-                    i++
-                }
+                let newsContent = $(`#news-${i}`).html();
+                let title = $(`#title-memo-${i}`).html();
+                $(`#text-input-${i}`).attr('value', ''+title+'');
+                let date = $(`#date-memo-${i}`).html();
+                $(`#date-input-${i}`).attr('value', ''+date+'');
+                $(`#editor-news-modif-${i}`).trumbowyg();
+                $(`#editor-news-modif-${i}`).trumbowyg(`html`, `${newsContent}`);
+                i++;
+            });
+            $('#pills-profile-tab').click(function(){
+                $('.editor').trigger('click');
             });
         });
     </script>
