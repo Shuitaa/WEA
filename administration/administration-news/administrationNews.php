@@ -216,6 +216,7 @@
                 $(`#date-input-${i}`).attr('value', ''+date+'');
                 $(`#editor-news-modif-${i}`).trumbowyg();
                 $(`#editor-news-modif-${i}`).trumbowyg(`html`, `${newsContent}`);
+     
                 i++;
             });
             $('#pills-profile-tab').click(function(){

@@ -92,13 +92,16 @@
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="../../node_modules/trumbowyg/dist/trumbowyg.min.js"></script>
-
-<script>
-    $(function () {
-        $('#editor-home').trumbowyg();
-    });
-</script>
-
+<?php
+    echo("
+    <script>
+        $(function () {
+            $('#editor-home').trumbowyg();
+            $('#editor-home').trumbowyg('html', '".$data_param["home_presentation"]."')
+        });
+    </script>
+    ");
+?>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
 </script>
