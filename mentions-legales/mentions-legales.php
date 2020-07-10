@@ -16,7 +16,7 @@
 <body>
 
     <?php 
-        $stmt_param = $db -> prepare("SELECT titre_site, url_logo, titre_mentions_legales, texte_mentions_legales FROM wea_parametre");
+        $stmt_param = $db -> prepare("SELECT titre_site, url_logo, texte_mentions_legales FROM wea_parametre");
         $stmt_param -> execute();
         $data_param = $stmt_param -> fetch();
     ?>
@@ -82,10 +82,7 @@
             <div class="mt-container">
                 <div class="mt-content">
                     <?php
-                        echo('
-                            <h3 class="subtitle mt-title">'.$data_param['titre_mentions_legales'].'</h3>
-                            '.$data_param['texte_mentions_legales'].'
-                        ');
+                        echo($data_param['texte_mentions_legales']);
                     ?>
                 </div>
             </div>

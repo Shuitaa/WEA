@@ -1,6 +1,22 @@
 <?php require ("../assets/secret.php");
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
+    chmod('../img', 0777);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
+    // print_r($_FILES);
+    // move_uploaded_file($_FILES['url_logo']['tmp_name'], '../img/'.$_FILES['url_logo']['name']);
+    // echo $_FILES['url_logo']['tmp_name'], '../img/'.$_FILES['url_logo']['name'];
+    $uploaddir = '../img/';
+    $uploadfile = $uploaddir . basename($_FILES['url_logo']['name']);
+    $verif = $_FILES['url_logo']['tmp_name'];
+    var_dump ($verif);
+    $url_logo = NULL;
+    if ( move_uploaded_file($_FILES['url_logo']['tmp_name'], $uploadfile)) {
+        echo "Le fichier est valide, et a été téléchargé
+               avec succès. Voici plus d'informations :\n";
+        $url_logo = 'img/'. basename($_FILES['url_logo']['name']);
+    } else {
+        echo "Attaque potentielle par téléchargement de fichiers.
+              Voici plus d'informations :\n";
+    }
     if(isset($_GET['form']) AND $_GET['form'] === 'global'){
         $nom_site = NULL;
         if (isset($_POST['nom_site']) AND $_POST['nom_site'] !== '') {
@@ -14,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['url_compte_twitter']) AND $_POST['url_compte_twitter'] !== '') {
             $url_compte_twitter = $_POST['url_compte_twitter'];
         }
-        $stmt_global = $db -> prepare("UPDATE wea_parametre SET titre_site = :nom_site, email = :email, url_compte_twitter = :url_compte_twitter");
-        $stmt_global -> execute(array(":nom_site" => $nom_site, ":email" => $email, ":url_compte_twitter" => $url_compte_twitter));
+        echo("cc ".$url_logo);
+        $stmt_global = $db -> prepare("UPDATE wea_parametre SET titre_site = :nom_site, email = :email, url_compte_twitter = :url_compte_twitter, url_logo = :url_logo");
+        $stmt_global -> execute(array(":nom_site" => $nom_site, ":email" => $email, ":url_compte_twitter" => $url_compte_twitter, ":url_logo" => $url_logo));
     }
     if(isset($_GET['form']) AND $_GET['form'] === 'home'){
         $titre_presentation = NULL;
@@ -64,6 +81,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt_home = $db -> prepare("UPDATE wea_news SET titre_news = :titre_news_modif, date_news = :date_news_modif, texte_news = :texte_news_modif WHERE id_news = :id_news");
         $stmt_home -> execute(array(":titre_news_modif" => $titre_news_modif, ":date_news_modif" => $date_news_modif, ":texte_news_modif" => $texte_news_modif, "id_news" => $id_news));
        
+    }
+    if(isset($_GET['form']) AND $_GET['form'] === 'ml'){
+        $texte_ml = NULL;
+        if (isset($_POST['editor-mt']) AND $_POST['editor-mt'] !== '') {
+            $texte_ml = $_POST['editor-mt'];
+        }
+        echo $texte_ml;
+        $stmt_home = $db -> prepare("UPDATE wea_parametre SET texte_mentions_legales = :texte_ml");
+        $stmt_home -> execute(array(":texte_ml" => $texte_ml));
     }
 
 } else if(isset($_GET['form']) AND $_GET['form'] === 'news_suppr'){

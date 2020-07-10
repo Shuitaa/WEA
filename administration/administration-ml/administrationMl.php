@@ -11,10 +11,17 @@
     <?php require ("../../assets/secret.php");?>
 </head>
 
+    <?php 
+        $stmt_param = $db -> prepare("SELECT texte_mentions_legales FROM wea_parametre");
+        $stmt_param -> execute();
+        $data_param = $stmt_param -> fetch();
+    ?>
+
 <body class="bg-light">
     <div class="container">
         <h1 class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">Interface d'administration de
             WEA</h1>
+        <form action="../adminApp.php?form=ml" method="post">
         <div class="shadow-sm p-3 mb-5 bg-white rounded text-center mt-4">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <a class="navbar-brand" href="#">WEA</a>
@@ -54,16 +61,26 @@
                 </div>
 
             </div>
+            <div class="d-flex justify-content-center mt-3 ">
+                    <button class="btn btn-light shadow-sm">Valider</button>
+                </div>
         </div>
+        </form>
+        
     </div>
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="../../node_modules/trumbowyg/dist/trumbowyg.min.js"></script>
+<?php
+    echo("
     <script>
         $(function () {
             $('#editor-mt').trumbowyg();
+            $('#editor-mt').trumbowyg('html', `".$data_param["texte_mentions_legales"]."`)
         });
     </script>
+    ");
+?>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>

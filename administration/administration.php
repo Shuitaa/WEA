@@ -51,7 +51,7 @@
             </nav>
         </div>
 
-        <form action="adminApp.php?form=global" method="POST">
+        <form action="adminApp.php?form=global" method="POST" enctype="multipart/form-data">
             <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
                 <h1 class="d-flex justify-content-center">Paramètres globaux</h1>
             </div>
@@ -73,7 +73,7 @@
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" name="url_logo">
+                                aria-describedby="inputGroupFileAddon01" name="url_logo" >
                             <label class="custom-file-label" for="inputGroupFile01">Choisir votre logo</label>
                         </div>
                     </div>
@@ -116,6 +116,7 @@
             </div>
         </form>
     </div>
+
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"

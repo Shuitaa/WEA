@@ -97,7 +97,7 @@
     <script>
         $(function () {
             $('#editor-home').trumbowyg();
-            $('#editor-home').trumbowyg('html', '".$data_param["home_presentation"]."')
+            $('#editor-home').trumbowyg('html', `".$data_param["home_presentation"]."`)
         });
     </script>
     ");
