@@ -1,22 +1,51 @@
 <?php require ("../assets/secret.php");
-    chmod('../img', 0777);
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
-    // print_r($_FILES);
-    // move_uploaded_file($_FILES['url_logo']['tmp_name'], '../img/'.$_FILES['url_logo']['name']);
-    // echo $_FILES['url_logo']['tmp_name'], '../img/'.$_FILES['url_logo']['name'];
+    $format = array('.jpg','.png','.gif','.jpeg');
     $uploaddir = '../img/';
-    $uploadfile = $uploaddir . basename($_FILES['url_logo']['name']);
-    $verif = $_FILES['url_logo']['tmp_name'];
-    var_dump ($verif);
-    $url_logo = NULL;
-    if ( move_uploaded_file($_FILES['url_logo']['tmp_name'], $uploadfile)) {
-        echo "Le fichier est valide, et a été téléchargé
-               avec succès. Voici plus d'informations :\n";
-        $url_logo = 'img/'. basename($_FILES['url_logo']['name']);
-    } else {
-        echo "Attaque potentielle par téléchargement de fichiers.
-              Voici plus d'informations :\n";
+    if (isset($_FILES['url_logo']) && $_FILES["url_logo"]["error"] === 0) {
+        $files_format = '.'. strtolower(substr(strrchr($_FILES['url_logo']['name'], '.'),1));
+        $uploadfile = $uploaddir . basename($_FILES['url_logo']['name']);
+        if (!in_array($files_format, $format)) {
+            echo("Le fichier n'est pas une image");
+            die;
+        }
+        if ( move_uploaded_file($_FILES['url_logo']['tmp_name'], $uploadfile)) {
+             echo "Le fichier est valide, et a été téléchargé
+                    avec succès. Voici plus d'informations :\n";
+             $url_logo = 'img/'. basename($_FILES['url_logo']['name']);
+         } else {
+             echo "Attaque potentielle par téléchargement de fichiers.
+                   Voici plus d'informations :\n";
+         }
     }
+    
+    $nb_fichiers = count($_FILES['image']['name']);
+    for ( $i=0; $i<$nb_fichiers; $i++ ) {
+        if (isset($_FILES['image']) && $_FILES["image"]["error"][$i] === 0) {
+            $files_format = '.'. strtolower(substr(strrchr($_FILES['image']['name'][$i], '.'),1));
+            $uploadfile = $uploaddir . basename($_FILES['image']['name'][$i]);
+            if (!in_array($files_format, $format)) {
+                echo("Le fichier n'est pas une image");
+                die;
+            }
+            if ( move_uploaded_file($_FILES['image']['tmp_name'][$i], $uploadfile)) {
+                 $image = 'img/'. basename($_FILES['image']['name'][$i]);
+                 $accueil = 0;
+                 if (isset($_GET['form']) AND $_GET['form'] === 'home') {
+                     $accueil = 1;
+                 }
+                 echo ("Nom : ".$_FILES['image']['name'][$i]." Url : ".$image." Accueil : ".$accueil);
+                 $stmt_image = $db -> prepare("INSERT INTO wea_image(nom, url_image, accueil) VALUES (:nom, :url_image, :accueil)");
+                 $stmt_image -> execute(array(":nom" => $_FILES['image']['name'][$i], ":url_image" => $image ,":accueil" => $accueil));
+             } else {
+                 echo "Attaque potentielle par téléchargement de fichiers.
+                       Voici plus d'informations :\n";
+                die;
+             }
+        }
+    }
+
     if(isset($_GET['form']) AND $_GET['form'] === 'global'){
         $nom_site = NULL;
         if (isset($_POST['nom_site']) AND $_POST['nom_site'] !== '') {
@@ -30,7 +59,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
         if (isset($_POST['url_compte_twitter']) AND $_POST['url_compte_twitter'] !== '') {
             $url_compte_twitter = $_POST['url_compte_twitter'];
         }
-        echo("cc ".$url_logo);
         $stmt_global = $db -> prepare("UPDATE wea_parametre SET titre_site = :nom_site, email = :email, url_compte_twitter = :url_compte_twitter, url_logo = :url_logo");
         $stmt_global -> execute(array(":nom_site" => $nom_site, ":email" => $email, ":url_compte_twitter" => $url_compte_twitter, ":url_logo" => $url_logo));
     }

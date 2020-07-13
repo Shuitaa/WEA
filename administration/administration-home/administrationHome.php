@@ -49,7 +49,7 @@
             </div>
         </nav>
     </div>
-    <form action="../adminApp.php?form=home" method="POST">
+    <form action="../adminApp.php?form=home" method="POST" enctype="multipart/form-data">
         <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
             <h1 class="d-flex justify-content-center">Paramètres de la page Home</h1>
         </div>
@@ -78,7 +78,7 @@
                     </div>
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="inputGroupFile01"
-                            aria-describedby="inputGroupFileAddon01" multiple name="image">
+                            aria-describedby="inputGroupFileAddon01" multiple name="image[]">
                         <label class="custom-file-label" for="inputGroupFile01">Choisir une/des image(s)</label>
                     </div>
                 </div>

@@ -12,8 +12,8 @@
 </head>
 
 <body class="bg-light">
-
     <?php 
+
                 $stmt_param = $db -> prepare("SELECT titre_site, email, url_compte_twitter FROM wea_parametre");
                 $stmt_param -> execute();
                 $data_param = $stmt_param -> fetch();
