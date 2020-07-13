@@ -84,8 +84,8 @@
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" name="url_image">
-                            <label class="custom-file-label" for="inputGroupFile01">Choisir votre logo</label>
+                                aria-describedby="inputGroupFileAddon01" name="image">
+                            <label class="custom-file-label" for="inputGroupFile01">Choisir votre image</label>
                         </div>
                     </div>
                 </div>
@@ -127,9 +127,11 @@
 
                             <div class="container shadow-sm p-3 mb-1 bg-white rounded mt-4" >
 
+                                <img style="float : right;" src="../../'.$data_news['url_image'].'">
                                 <h1 id="title-memo-'.$data_news['id_news'].'">'.$data_news['titre_news'].'</h1>
                                 <h2 id="date-memo-'.$data_news['id_news'].'">'.$data_news['date_news'].'</h2>
                                 <div id="news-'.$data_news['id_news'].'"><p>'.$data_news['texte_news'].'</p></div>
+
 
                             </div>
                         </div>

@@ -100,7 +100,7 @@
                         </div>
                     </div>
                     <div class="footer-content-right">
-                        <a href="" class="link">Connexion</a>
+                        <a href="../administration/administration.php" class="link">Connexion</a>
                     </div>
                 </div>
             </footer>
