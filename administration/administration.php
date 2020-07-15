@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="../node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../vendors/zip.js/WebContent/zip.js"></script>    
     <?php require ("../assets/secret.php");?>
 </head>
 
@@ -108,6 +110,20 @@
                             aria-describedby="inputGroup-sizing-default" name="url_captcha">
                     </div>
                 </div>
+
+                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Word</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="word"
+                                aria-describedby="inputGroupFileAddon01" name="word" >
+                            <label class="custom-file-label" for="inputGroupFile01">Choisir votre fichier word</label>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="d-flex justify-content-center mt-3 ">
                     <button class="btn btn-light shadow-sm">Valider</button>
                 </div>
@@ -118,7 +134,7 @@
     </div>
 
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="adminApp.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
