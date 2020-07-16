@@ -1,0 +1,4 @@
+AuthName "Page d'administration protégée"
+AuthType Basic
+AuthUserFile "/mnt/traban_home/3mm1/paverty/WWW-perso/WEA/administration/.htpasswd"
+Require valid-user
