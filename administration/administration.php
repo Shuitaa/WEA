@@ -9,7 +9,7 @@
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="../node_modules/trumbowyg/dist/ui/trumbowyg.min.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../vendors/zip.js/WebContent/zip.js"></script>    
+    <script type="text/javascript" src="../vendors/zip.js/WebContent/zip.js"></script>
     <?php require ("../assets/secret.php");?>
 </head>
 
@@ -64,7 +64,8 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">Nom du site</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" name="nom_site" <?php echo ('value="'.$data_param['titre_site'].'"');?>>
+                            aria-describedby="inputGroup-sizing-default" name="nom_site"
+                            <?php echo ('value="'.$data_param['titre_site'].'"');?>>
                     </div>
                 </div>
 
@@ -75,7 +76,7 @@
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01" name="url_logo" >
+                                aria-describedby="inputGroupFileAddon01" name="url_logo">
                             <label class="custom-file-label" for="inputGroupFile01">Choisir votre logo</label>
                         </div>
                     </div>
@@ -87,7 +88,8 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">Adresse Mail</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" name="email" <?php echo ('value="'.$data_param['email'].'"'); ?>>
+                            aria-describedby="inputGroup-sizing-default" name="email"
+                            <?php echo ('value="'.$data_param['email'].'"'); ?>>
                     </div>
                 </div>
 
@@ -97,7 +99,8 @@
                             <span class="input-group-text" id="inputGroup-sizing-default">URL compte twitter</span>
                         </div>
                         <input type="text" class="form-control" aria-label="Sizing example input"
-                            aria-describedby="inputGroup-sizing-default" name="url_compte_twitter" <?php echo ('value="'.$data_param['url_compte_twitter'].'"'); ?>>
+                            aria-describedby="inputGroup-sizing-default" name="url_compte_twitter"
+                            <?php echo ('value="'.$data_param['url_compte_twitter'].'"'); ?>>
                     </div>
                 </div>
 
@@ -118,19 +121,40 @@
                         </div>
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="word"
-                                aria-describedby="inputGroupFileAddon01" name="word" >
+                                aria-describedby="inputGroupFileAddon01" name="word">
                             <label class="custom-file-label" for="inputGroupFile01">Choisir votre fichier word</label>
                         </div>
                     </div>
                 </div>
-
+                <ol id="demo-container">
+                    <li>
+                        <label>
+                            <span class="form-label">choose a zip file</span>
+                            <input type="file" accept="application/zip" id="file-input">
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span class="form-label">choose temporary storage</span>
+                            <select id="creation-method-input">
+                                <option value="Blob">RAM</option>
+                                <option value="File">HDD</option>
+                            </select>
+                        </label>
+                    </li>
+                    <li>
+                        <span class="form-label">download zip content</span>
+                        <ul id="file-list">
+                        </ul>
+                    </li>
+                </ol>
                 <div class="d-flex justify-content-center mt-3 ">
                     <button class="btn btn-light shadow-sm">Valider</button>
                 </div>
 
             </div>
-            </div>
-        </form>
+    </div>
+    </form>
     </div>
 
 
