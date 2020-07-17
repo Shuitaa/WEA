@@ -114,29 +114,42 @@
                     </div>
                 </div>
 
-                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">Word</span>
-                        </div>
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="word"
-                                aria-describedby="inputGroupFileAddon01" name="word">
-                            <label class="custom-file-label" for="inputGroupFile01">Choisir votre fichier word</label>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4" id="xml-container">
-                </div>
 
                 <div class="d-flex justify-content-center mt-3 ">
                     <button class="btn btn-light shadow-sm">Valider</button>
                 </div>
 
+
+            </div>
+            </form>
+            <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
+                <h1 class="d-flex justify-content-center">Envois du fichier word</h1>
+            </div>
+            <div class="container shadow-sm p-3 mb-1 bg-white rounded mt-4">
+            <div class="shadow-sm p-3 mb-5 bg-white rounded mt-4">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroupFileAddon01">Word</span>
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="word" aria-describedby="inputGroupFileAddon01"
+                            name="word">
+                        <label class="custom-file-label" for="inputGroupFile01">Choisir votre fichier word</label>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display : none;" id="xml-container"></div>
+
+            <div class="d-flex justify-content-center mt-3 ">
+                    <button id="send-word" class="btn btn-light shadow-sm">Valider</button>
+                </div>
             </div>
     </div>
-    </form>
+            
+    </div>
+
     </div>
 
 

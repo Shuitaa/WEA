@@ -43,14 +43,21 @@ zip.workerScripts = {
 					entry.getData(writer, (blob) => {
 						const xmlContainer = document.getElementById("xml-container");
 						blob.text().then((data) => {
-							 const str = data.replace(/w:/gi, "w");
-							// xmlContainer.textContent = str;
-							// const test = $("w[t]").text();
-							// console.log(test);
+							const str = data.replace(/w:/gi, "w");
 							xmlContainer.innerHTML = str;
-							var xml = $('xml-container').html();
-							var xmlDoc = $.parseXML(xml);
-							var $xml = $(xmlDoc);
+
+							var parser = new DOMParser();
+							var xmlDoc = parser.parseFromString(str, "text/xml");
+							let i = 0;
+							xmlDoc.querySelectorAll('wr').forEach((e) => {
+								i++
+								if(i < 10) {
+								console.log(e.firstChild);
+							}
+							})
+								// [0].childNodes[0].nodeValue;
+
+							sendData();
 
 						});
 					}, onprogress);
@@ -89,4 +96,11 @@ zip.workerScripts = {
 		}, false);
 	})();
 
+	function sendData() {
+		$("#send-word").click(() => {
+			$("wrpr [wval=140]").addClass("lettre");
+			$(".lettre ~ wt").text();
+
+		});
+	};
 })(this);
