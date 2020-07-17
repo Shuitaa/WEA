@@ -1,50 +1,58 @@
 zip.workerScripts = {
-    deflater: ['../vendors/zip.js/WebContent/z-worker.js', '../vendors/zip.js/WebContent/deflate.js'],
-    inflater: ['../vendors/zip.js/WebContent/z-worker.js', '../vendors/zip.js/WebContent/inflate.js']
+	deflater: ['../vendors/zip.js/WebContent/z-worker.js', '../vendors/zip.js/WebContent/deflate.js'],
+	inflater: ['../vendors/zip.js/WebContent/z-worker.js', '../vendors/zip.js/WebContent/inflate.js']
 };
 
-(function(obj) {
+(function (obj) {
 
-	var requestFileSystem = obj.webkitRequestFileSystem || obj.mozRequestFileSystem || obj.requestFileSystem;
+	const requestFileSystem = obj.webkitRequestFileSystem || obj.mozRequestFileSystem || obj.requestFileSystem;
 
 	function onerror(message) {
 		alert(message);
 	}
 
 	function createTempFile(callback) {
-		var tmpFilename = "tmp.dat";
-		requestFileSystem(TEMPORARY, 4 * 1024 * 1024 * 1024, function(filesystem) {
+		const tmpFilename = "tmp.dat";
+		requestFileSystem(TEMPORARY, 4 * 1024 * 1024 * 1024, (filesystem) => {
 			function create() {
 				filesystem.root.getFile(tmpFilename, {
-					create : true
-				}, function(zipFile) {
+					create: true
+				}, (zipFile) => {
 					callback(zipFile);
 				});
 			}
 
-			filesystem.root.getFile(tmpFilename, null, function(entry) {
+			filesystem.root.getFile(tmpFilename, null, (entry) => {
 				entry.remove(create, create);
 			}, create);
 		});
 	}
 
-	var model = (function() {
-		var URL = obj.webkitURL || obj.mozURL || obj.URL;
+	const model = (() => {
 
 		return {
-			getEntries : function(file, onend) {
-				zip.createReader(new zip.BlobReader(file), function(zipReader) {
+			getEntries: function (file, onend) {
+				zip.createReader(new zip.BlobReader(file), (zipReader) => {
 					zipReader.getEntries(onend);
 				}, onerror);
 			},
-			getEntryFile : function(entry, creationMethod, onend, onprogress) {
-				var writer, zipFileEntry;
+			getEntryFile: (entry, creationMethod, onprogress) => {
+				let writer, zipFileEntry;
 
 				function getData() {
-					entry.getData(writer, function(blob) {
-						var blobURL = creationMethod == "Blob" ? URL.createObjectURL(blob) : zipFileEntry.toURL();
-                        console.log(blob.text().then((data) => {console.log(data)}));
-                        onend(blobURL);
+					entry.getData(writer, (blob) => {
+						const xmlContainer = document.getElementById("xml-container");
+						blob.text().then((data) => {
+							 const str = data.replace(/w:/gi, "w");
+							// xmlContainer.textContent = str;
+							// const test = $("w[t]").text();
+							// console.log(test);
+							xmlContainer.innerHTML = str;
+							var xml = $('xml-container').html();
+							var xmlDoc = $.parseXML(xml);
+							var $xml = $(xmlDoc);
+
+						});
 					}, onprogress);
 				}
 
@@ -52,7 +60,7 @@ zip.workerScripts = {
 					writer = new zip.BlobWriter();
 					getData();
 				} else {
-					createTempFile(function(fileEntry) {
+					createTempFile((fileEntry) => {
 						zipFileEntry = fileEntry;
 						writer = new zip.FileWriter(zipFileEntry);
 						getData();
@@ -62,37 +70,20 @@ zip.workerScripts = {
 		};
 	})();
 
-	(function() {
-		var fileInput = document.getElementById("file-input");
-		var unzipProgress = document.createElement("progress");
-		var fileList = document.getElementById("file-list");
-		var creationMethodInput = document.getElementById("creation-method-input");
+	(function () {
+		const fileInput = document.getElementById("word");
+		const BlobString = "Blob";
 
-		function download(entry, li, a) {
-			model.getEntryFile(entry, creationMethodInput.value, function(blobURL) {
-				// var clickEvent = document.createEvent("MouseEvent");
-				// if (unzipProgress.parentNode)
-				// 	unzipProgress.parentNode.removeChild(unzipProgress);
-				// unzipProgress.value = 0;
-				// unzipProgress.max = 0;
-				// clickEvent.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
-
-			});
+		function download(entry) {
+			model.getEntryFile(entry, BlobString);
 		}
 
-		if (typeof requestFileSystem == "undefined")
-			creationMethodInput.options.length = 1;
-		fileInput.addEventListener('change', function() {
-			model.getEntries(fileInput.files[0], function(entries) {
-				fileList.innerHTML = "";
-				entries.forEach(function(entry) {
-					var li = document.createElement("li");
-					var a = document.createElement("a");
-					a.textContent = entry.filename;
-                    a.href = "#";
-                    if(entry.filename === 'word/document.xml') {
-                        download(entry);
-                    }
+		fileInput.addEventListener('change', () => {
+			model.getEntries(fileInput.files[0], (entries) => {
+				entries.forEach((entry) => {
+					if (entry.filename === 'word/document.xml') {
+						download(entry);
+					}
 				});
 			});
 		}, false);

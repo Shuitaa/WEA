@@ -126,28 +126,10 @@
                         </div>
                     </div>
                 </div>
-                <ol id="demo-container">
-                    <li>
-                        <label>
-                            <span class="form-label">choose a zip file</span>
-                            <input type="file" accept="application/zip" id="file-input">
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <span class="form-label">choose temporary storage</span>
-                            <select id="creation-method-input">
-                                <option value="Blob">RAM</option>
-                                <option value="File">HDD</option>
-                            </select>
-                        </label>
-                    </li>
-                    <li>
-                        <span class="form-label">download zip content</span>
-                        <ul id="file-list">
-                        </ul>
-                    </li>
-                </ol>
+
+                <div class="container shadow-sm p-3 mb-1 bg-light rounded mt-4" id="xml-container">
+                </div>
+
                 <div class="d-flex justify-content-center mt-3 ">
                     <button class="btn btn-light shadow-sm">Valider</button>
                 </div>
