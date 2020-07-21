@@ -19,7 +19,6 @@
 
         $stmt_img = $db -> prepare("SELECT * FROM wea_image WHERE accueil=1");
         $stmt_img -> execute();
-
     ?>
 
     <main>

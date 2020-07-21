@@ -49,15 +49,46 @@ zip.workerScripts = {
 							var parser = new DOMParser();
 							var xmlDoc = parser.parseFromString(str, "text/xml");
 							let i = 0;
-							xmlDoc.querySelectorAll('wr').forEach((e) => {
-								i++
-								if(i < 10) {
-								console.log(e.firstChild);
-							}
-							})
-								// [0].childNodes[0].nodeValue;
+							console.log(xmlDoc);
+							xmlDoc.querySelectorAll('wsz[wval="144"]').forEach((e) => {
+								const wrprParent = e.parentNode;
+								if(wrprParent !== null) {
+									const lettre = wrprParent.parentNode.querySelector('wt');
+									if (lettre !== null)
+										console.log(lettre.textContent)
+								}
+							});
+							xmlDoc.querySelectorAll('wpStyle[wval="Titre1"]').forEach((e) => {
+								const wpstyleParent = e.parentNode;
+								if(wpstyleParent !== null) {
+									const mot = wpstyleParent.parentNode.querySelectorAll('wt');
+									if (mot !== null) {
+										const textMot1 = mot[0].textContent;
+										let textMot = textMot1;
+										for(let i = 1;mot[i] !== undefined;i++){
+											const textMot2 = mot[1].textContent;
+											textMot += textMot2;
+										}
+										console.log(textMot)
+									}
+								}
+							});
+							xmlDoc.querySelectorAll('wpStyle[wval="Titre2"]').forEach((e) => {
+								const wpstyleParent = e.parentNode;
+								if(wpstyleParent !== null) {
+									const sousTitre = wpstyleParent.parentNode.querySelectorAll('wt');
+									if (sousTitre !== null && sousTitre[0] !== undefined) {
+										const textSousTitre1 = sousTitre[0].textContent;
+										let textSousTitre = textSousTitre1;
+										for(let i = 1; sousTitre[i] !== undefined; i++){
+											const textSousTitre2 = sousTitre[i].textContent;
+											textSousTitre += textSousTitre2;
+										}
+										console.log(textSousTitre)
+									}
+								}
+							});
 
-							sendData();
 
 						});
 					}, onprogress);
@@ -96,11 +127,5 @@ zip.workerScripts = {
 		}, false);
 	})();
 
-	function sendData() {
-		$("#send-word").click(() => {
-			$("wrpr [wval=140]").addClass("lettre");
-			$(".lettre ~ wt").text();
 
-		});
-	};
 })(this);
