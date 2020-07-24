@@ -49,46 +49,7 @@ zip.workerScripts = {
 							var parser = new DOMParser();
 							var xmlDoc = parser.parseFromString(str, "text/xml");
 							let i = 0;
-							console.log(xmlDoc);
-							xmlDoc.querySelectorAll('wsz[wval="144"]').forEach((e) => {
-								const wrprParent = e.parentNode;
-								if(wrprParent !== null) {
-									const lettre = wrprParent.parentNode.querySelector('wt');
-									if (lettre !== null)
-										console.log(lettre.textContent)
-								}
-							});
-							xmlDoc.querySelectorAll('wpStyle[wval="Titre1"]').forEach((e) => {
-								const wpstyleParent = e.parentNode;
-								if(wpstyleParent !== null) {
-									const mot = wpstyleParent.parentNode.querySelectorAll('wt');
-									if (mot !== null) {
-										const textMot1 = mot[0].textContent;
-										let textMot = textMot1;
-										for(let i = 1;mot[i] !== undefined;i++){
-											const textMot2 = mot[1].textContent;
-											textMot += textMot2;
-										}
-										console.log(textMot)
-									}
-								}
-							});
-							xmlDoc.querySelectorAll('wpStyle[wval="Titre2"]').forEach((e) => {
-								const wpstyleParent = e.parentNode;
-								if(wpstyleParent !== null) {
-									const sousTitre = wpstyleParent.parentNode.querySelectorAll('wt');
-									if (sousTitre !== null && sousTitre[0] !== undefined) {
-										const textSousTitre1 = sousTitre[0].textContent;
-										let textSousTitre = textSousTitre1;
-										for(let i = 1; sousTitre[i] !== undefined; i++){
-											const textSousTitre2 = sousTitre[i].textContent;
-											textSousTitre += textSousTitre2;
-										}
-										console.log(textSousTitre)
-									}
-								}
-							});
-
+							getXml(xmlDoc.querySelector("wbody"));
 
 						});
 					}, onprogress);
@@ -129,3 +90,33 @@ zip.workerScripts = {
 
 
 })(this);
+
+function getXml(node) {
+	let mode = "";
+	let tab = [];
+
+	console.log("cc");
+	if(mode === "lettre") {
+
+		if(node.nodeName === "wt") {
+			tab.push({"type":"h1", "content": node.textContent});
+			mode = "";
+		}
+	}
+	if (mode === "mot") {
+		if(node.nodeName === "wr" ) {
+			tab.push({"type":"h2", "content": node.textContent});
+			mode = "definition";
+		}
+	}
+	
+    if ((mode === "definition") && (node.attributes == undefined)) {
+        tab.push({"type":"text", "content": node.textContent});
+	}
+	
+
+	node.childNodes.forEach((e) => {
+		getXml(e);
+	})
+
+}
