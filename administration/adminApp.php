@@ -11,8 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
             die;
         }
         if ( move_uploaded_file($_FILES['url_logo']['tmp_name'], $uploadfile)) {
-             echo "Le fichier est valide, et a été téléchargé
-                    avec succès. Voici plus d'informations :\n";
              $url_logo = 'img/'. basename($_FILES['url_logo']['name']);
          } else {
              echo "Attaque potentielle par téléchargement de fichiers.
@@ -21,31 +19,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
     }
     
     $nb_fichiers = count($_FILES['image']['name']);
-    for ( $i=0; $i<$nb_fichiers; $i++ ) {
-        if (isset($_FILES['image']) && $_FILES["image"]["error"][$i] === 0) {
-            $files_format = '.'. strtolower(substr(strrchr($_FILES['image']['name'][$i], '.'),1));
-            $uploadfile = $uploaddir . basename($_FILES['image']['name'][$i]);
-            if (!in_array($files_format, $format)) {
-                echo("Le fichier n'est pas une image");
-                die;
+    if ($nb_fichiers > 1) {
+        for ( $i=0; $i<$nb_fichiers; $i++ ) {
+            if (isset($_FILES['image']) && $_FILES["image"]["error"][$i] === 0) {
+                $files_format = '.'. strtolower(substr(strrchr($_FILES['image']['name'][$i], '.'),1));
+                $uploadfile = $uploaddir . basename($_FILES['image']['name'][$i]);
+                if (!in_array($files_format, $format)) {
+                    echo("Le fichier n'est pas une image");
+                    die;
+                }
+                if ( move_uploaded_file($_FILES['image']['tmp_name'][$i], $uploadfile)) {
+                    $image = 'img/'. basename($_FILES['image']['name'][$i]);
+                    $accueil = 0;
+                    if (isset($_GET['form']) AND $_GET['form'] === 'home') {
+                        $accueil = 1;
+                    }
+                    echo ("Nom : ".$_FILES['image']['name'][$i]." Url : ".$image." Accueil : ".$accueil);
+                    $stmt_image = $db -> prepare("INSERT INTO wea_image(nom, url_image, accueil) VALUES (:nom, :url_image, :accueil)");
+                    $stmt_image -> execute(array(":nom" => $_FILES['image']['name'][$i], ":url_image" => $image ,":accueil" => $accueil));
+                } else {
+                    echo "Attaque potentielle par téléchargement de fichiers.
+                        Voici plus d'informations :\n";
+                    die;
+                }
             }
-            if ( move_uploaded_file($_FILES['image']['tmp_name'][$i], $uploadfile)) {
-                 $image = 'img/'. basename($_FILES['image']['name'][$i]);
-                 $accueil = 0;
-                 if (isset($_GET['form']) AND $_GET['form'] === 'home') {
-                     $accueil = 1;
-                 }
-                 echo ("Nom : ".$_FILES['image']['name'][$i]." Url : ".$image." Accueil : ".$accueil);
-                 $stmt_image = $db -> prepare("INSERT INTO wea_image(nom, url_image, accueil) VALUES (:nom, :url_image, :accueil)");
-                 $stmt_image -> execute(array(":nom" => $_FILES['image']['name'][$i], ":url_image" => $image ,":accueil" => $accueil));
-             } else {
-                 echo "Attaque potentielle par téléchargement de fichiers.
-                       Voici plus d'informations :\n";
-                die;
-             }
         }
     }
-
     if(isset($_GET['form']) AND $_GET['form'] === 'global'){
         $nom_site = NULL;
         if (isset($_POST['nom_site']) AND $_POST['nom_site'] !== '') {
@@ -61,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
         }
         $stmt_global = $db -> prepare("UPDATE wea_parametre SET titre_site = :nom_site, email = :email, url_compte_twitter = :url_compte_twitter, url_logo = :url_logo");
         $stmt_global -> execute(array(":nom_site" => $nom_site, ":email" => $email, ":url_compte_twitter" => $url_compte_twitter, ":url_logo" => $url_logo));
+        header("Location : administration.php");
     }
     if(isset($_GET['form']) AND $_GET['form'] === 'home'){
         $titre_presentation = NULL;
@@ -73,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
         }
         $stmt_home = $db -> prepare("UPDATE wea_parametre SET titre_home_presentation = :titre_presentation, home_presentation = :texte_presentation");
         $stmt_home -> execute(array(":titre_presentation" => $titre_presentation, ":texte_presentation" => $texte_presentation));
+        header("Location : /administration-home/administrationHome.php");
     }
     if(isset($_GET['form']) AND $_GET['form'] === 'news_add'){
         $titre_news = NULL;
@@ -89,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
         }
         $stmt_home = $db -> prepare("INSERT INTO wea_news(titre_news, date_news, texte_news) VALUES (:titre_news, :date_news, :texte_news)");
         $stmt_home -> execute(array(":titre_news" => $titre_news, ":date_news" => $date_news, ":texte_news" => $texte_news));
-       
+        header("Location : /administration-news/administrationNews.php");
     }
     if(isset($_GET['form']) AND $_GET['form'] === 'news_modif'){
         $id_news = (int) $_GET['id_article'];
@@ -108,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
         echo $titre_news_modif;
         $stmt_home = $db -> prepare("UPDATE wea_news SET titre_news = :titre_news_modif, date_news = :date_news_modif, texte_news = :texte_news_modif WHERE id_news = :id_news");
         $stmt_home -> execute(array(":titre_news_modif" => $titre_news_modif, ":date_news_modif" => $date_news_modif, ":texte_news_modif" => $texte_news_modif, "id_news" => $id_news));
-       
+        header("Location : /administration-news/administrationNews.php");
     }
     if(isset($_GET['form']) AND $_GET['form'] === 'ml'){
         $texte_ml = NULL;
@@ -118,11 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {;
         echo $texte_ml;
         $stmt_home = $db -> prepare("UPDATE wea_parametre SET texte_mentions_legales = :texte_ml");
         $stmt_home -> execute(array(":texte_ml" => $texte_ml));
+        header("Location : /administration-ml/administrationMl.php");
     }
 
 } else if(isset($_GET['form']) AND $_GET['form'] === 'news_suppr'){
     $stmt_suppr_article = $db -> prepare("DELETE FROM wea_news WHERE id_news = :id");
     $stmt_suppr_article -> execute(array(":id" => $_GET['id']));
+    header("Location : /administration-news/administrationNews.php");
 } else {
     http_response_code(500);
 }

@@ -92,13 +92,6 @@
             </nav>
             <div class="title-page">
                 <h2 class="title "><?php echo $data_mot['mot'] ?></h2>
-                <?php
-                if($data_mot['description'] !== NULL ){ 
-                    echo('
-                        <h3 class="description-lettre">'.$data_mot['description'].'</h3>
-                    ');
-                }
-                ?>
             </div>
             <div class="list-container definition">
                     <ul>

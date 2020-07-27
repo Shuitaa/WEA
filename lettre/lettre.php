@@ -92,13 +92,6 @@
             </nav>
             <div class="title-page">
                 <h2 class="title "><?php echo strtoupper($data_letter['lettre']) ?></h2>
-                <?php
-                if($data_letter['description_lettre'] !== NULL ){ 
-                    echo('
-                        <h3 class="description-lettre">'.$data_letter['description_lettre'].'</h3>
-                    ');
-                }
-                ?>
             </div>
             <div class="list-container">
                 <div class="list-content">
