@@ -1,6 +1,7 @@
-<?php 
+<?php
+require ("secret.php");
 function head($nomPage ,$typePage) {
-
+    global $db;
     $stmt_param = $db -> prepare("SELECT titre_site, url_logo, titre_home_presentation, home_presentation FROM wea_parametre");
     $stmt_param -> execute();
     $data_param = $stmt_param -> fetch();
@@ -19,5 +20,26 @@ function head($nomPage ,$typePage) {
         ");
 
     }
+}
+function footer() {
+    echo("
+    <footer>
+    <div class='footer-content'>
+        <div class='footer-content-left'>
+            <div>
+                <a href='javascript:window.print();' class='link'>Version imprimable</a>
+                <span>|</span>
+                <a href='' class='link'>Plan du site</a>
+            </div>
+            <div>
+                <span class='footer-content-left-bottom'>© ".$data_param["titre_site"]."</span>
+            </div>
+        </div>
+        <div class='footer-content-right'>
+            <a href='administration/administration.php' class='link'>Connexion</a>
+        </div>
+    </div>
+    </footer>
+    ");
 }
 ?>
