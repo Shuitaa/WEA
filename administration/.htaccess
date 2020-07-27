@@ -1,4 +1,4 @@
 AuthName "Page d'administration protégée"
 AuthType Basic
-AuthUserFile "C:\xampp\htdocs\WEA\administration\.htpasswd"
+AuthUserFile "CheminAbsoluVersLe.htpasswd"
 Require valid-user

@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>L'encyclopédie des femmes - Home</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/app.css">
-    <link rel="stylesheet" media="screen and (max-width:940px)" href= assets/940app.css>
-    <link rel="stylesheet" media="screen and (max-width:600px)" href= assets/600app.css>
-    <?php require ("assets/secret.php");?>
-</head>
+<?php require ("assets/secret.php");
+require ("assets/function.php");
+head('home' ,'front');
+?>
+
+
 <body>
 
     <?php
@@ -130,6 +126,5 @@
         </div>
     </main>
 
-    <script src="assets/app.js"></script>
 </body>
 </html>
